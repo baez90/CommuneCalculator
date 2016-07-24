@@ -47,7 +47,7 @@ namespace CommuneCalculator.DB.DataAccess
         /// <returns>entity with specified id or null</returns>
         public virtual Optional<TEntity> FindById(object id)
         {
-            return new Optional<TEntity>(Context.Set<TEntity>().Find(id));
+            return Context.Set<TEntity>().Find(id);
         }
 
         /// <summary>
@@ -142,7 +142,7 @@ namespace CommuneCalculator.DB.DataAccess
         /// <returns>entity if existing or null if not</returns>
         public virtual async Task<Optional<TEntity>> FindByIdAsync(object id)
         {
-            return new Optional<TEntity>(await Context.Set<TEntity>().FindAsync(id));
+            return await Context.Set<TEntity>().FindAsync(id);
         }
 
         /// <summary>

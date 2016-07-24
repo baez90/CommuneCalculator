@@ -1,26 +1,30 @@
 ﻿namespace CommuneCalculator.DB.Models
 {
-    public class Optional<TValue>
+    public struct Optional<T>
     {
-
-        private TValue _value;
-
-        public Optional(TValue value)
+        private Optional(T value)
         {
             Value = value;
-            HasValue = value != null && !value.Equals(default(TValue));
+            HasValue = value != null;
         }
 
-        public TValue Value
+        public T Value { get; }
+
+        public bool HasValue { get; }
+
+        public static Optional<TO> Of<TO>(TO value)
         {
-            get { return _value; }
-            set
-            {
-                _value = value;
-                HasValue = value != null && !value.Equals(default(TValue));
-            }
+            return new Optional<TO>(value);
         }
 
-        public bool HasValue { get; private set; }
+        public static Optional<TO> Empty<TO>()
+        {
+            return new Optional<TO>(default(TO));
+        }
+
+        public static implicit operator Optional<T>(T value)
+        {
+            return Of(value);
+        }
     }
 }

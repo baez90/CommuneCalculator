@@ -1,11 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.25123.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommuneCalculator", "WG-Rechner\CommuneCalculator.csproj", "{781DDC87-C336-46CC-BEF9-A0BF548673F4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommuneCalculator.WPF", "CommuneCalculator.WPF\CommuneCalculator.WPF.csproj", "{781DDC87-C336-46CC-BEF9-A0BF548673F4}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommuneCalculator.DB", "CommuneCalculator.DB\CommuneCalculator.DB.csproj", "{6150126E-8905-40FD-B379-CB8A1F5C1AB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommuneCalculator.DB.Tests", "CommuneCalculator.DB.Tests\CommuneCalculator.DB.Tests.csproj", "{8B1D20EB-98C2-4835-BDFF-1B9ACCAF149F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommuneCalculator.WPF.Tests", "CommuneCalculator.WPF.Tests\CommuneCalculator.WPF.Tests.csproj", "{C3781A36-6569-47B6-98CA-98C1BA983940}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +25,14 @@ Global
 		{6150126E-8905-40FD-B379-CB8A1F5C1AB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6150126E-8905-40FD-B379-CB8A1F5C1AB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6150126E-8905-40FD-B379-CB8A1F5C1AB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8B1D20EB-98C2-4835-BDFF-1B9ACCAF149F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8B1D20EB-98C2-4835-BDFF-1B9ACCAF149F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8B1D20EB-98C2-4835-BDFF-1B9ACCAF149F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8B1D20EB-98C2-4835-BDFF-1B9ACCAF149F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3781A36-6569-47B6-98CA-98C1BA983940}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3781A36-6569-47B6-98CA-98C1BA983940}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3781A36-6569-47B6-98CA-98C1BA983940}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3781A36-6569-47B6-98CA-98C1BA983940}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
