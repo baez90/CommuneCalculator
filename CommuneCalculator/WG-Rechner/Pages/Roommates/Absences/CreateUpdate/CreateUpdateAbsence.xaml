@@ -1,0 +1,39 @@
+﻿<base:DisposableUserControl x:Class="CommuneCalculator.Pages.Roommates.Absences.CreateUpdate.CreateUpdateAbsence"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:CommuneCalculator.Pages.Roommates.Absences.CreateUpdate"
+             xmlns:base="clr-namespace:CommuneCalculator.Pages.Base"
+             mc:Ignorable="d" 
+                            DataContext="{Binding CreateUpdateAbsence, Source={StaticResource Locator}}"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <base:DisposableUserControl.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Label">
+                
+            </Style>
+        </ResourceDictionary>
+    </base:DisposableUserControl.Resources>
+    <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Label Content="Reason" Grid.Row="1" Grid.Column="0"/>
+        <Label Content="AbsenceStart" Grid.Row="2" Grid.Column="0"/>
+        <Label Content="AbsenceEnd" Grid.Row="3" Grid.Column="0"/>
+        
+        <TextBox Text="{Binding Absence.Reason}" Grid.Row="1" Grid.Column="1"/>
+        <DatePicker SelectedDate="{Binding Absence.AbsenceStart}" Grid.Row="2" Grid.Column="1"/>
+        <DatePicker SelectedDate="{Binding Absence.AbsenceEnd}" Grid.Row="3" Grid.Column="1"/>
+    </Grid>
+</base:DisposableUserControl>
+

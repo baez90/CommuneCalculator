@@ -1,0 +1,68 @@
+﻿<base:DisposableUserControl x:Class="CommuneCalculator.Pages.Roommates.Overview.RoommateOverview"
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:base="clr-namespace:CommuneCalculator.Pages.Base"
+                            xmlns:command="http://www.galasoft.ch/mvvmlight"
+                            xmlns:i18N="clr-namespace:CommuneCalculator.Pages.Roommates.Overview"
+                            xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+                            xmlns:utils="clr-namespace:CommuneCalculator.Utils"
+                            mc:Ignorable="d"
+                            DataContext="{Binding RoommateOverview, Source={StaticResource Locator}}">
+    <i:Interaction.Triggers>
+        <i:EventTrigger EventName="Loaded">
+            <command:EventToCommand Command="{Binding UpdateCommand}"/>
+        </i:EventTrigger>
+    </i:Interaction.Triggers>
+    <base:DisposableUserControl.Resources>
+        <ResourceDictionary />
+    </base:DisposableUserControl.Resources>
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <DataGrid AutoGenerateColumns="False" CanUserReorderColumns="True"
+                  CanUserResizeColumns="True"
+                  CanUserResizeRows="False" CanUserSortColumns="True" AlternatingRowBackground="LightBlue"
+                  AlternationCount="2" ItemsSource="{Binding Roommates}">
+            <DataGrid.Resources>
+                <utils:DataContextProxy x:Key="Proxy" Data="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}}" />
+            </DataGrid.Resources>
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.FirstNameColHeader}" Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.LastNameColHeader}" Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.MoveInDateColHeader}" Binding="{Binding MoveInDate,StringFormat={}{0:dddd dd MMMM yyyy},ConverterCulture=de-DE}" />
+                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.MoveOutColHeader}" Binding="{Binding MoveOutDate,StringFormat={}{0:dddd dd MMMM yyyy},ConverterCulture=de-DE, TargetNullValue='{x:Static i18N:RoommateOverviewI18n.MoveOutColTargetNull}'}" />
+                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.LoginColHeader}" Binding="{Binding Login}" />
+            </DataGrid.Columns>
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="{x:Static i18N:RoommateOverviewI18n.EditRoommateCtxMenuItem}" Command="{Binding EditRoommateCommand}" CommandParameter="{Binding Data.SelectedItem, Source={StaticResource Proxy}}"/>
+                </ContextMenu>
+            </DataGrid.ContextMenu>
+            <DataGrid.RowDetailsTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <DataGrid/>
+                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                            <Button Content="Abwesenheit hinzufügen" Style="{StaticResource CommonButton}" Margin="0 10 10 10"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </DataGrid.RowDetailsTemplate>
+        </DataGrid>
+        
+        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Command="{Binding SwitchToCreateRoommateView}" Content="{x:Static i18N:RoommateOverviewI18n.CreateRoommateBtnLbl}" Margin="0,65,0,10" Style="{StaticResource CommonButton}"/>
+        </StackPanel>
+
+        <Image Source="pack://application:,,,/Resources/Images/banner-haus.jpg" Stretch="Fill" Margin="0,0,0,10" Grid.Row="2" />
+    </Grid>
+</base:DisposableUserControl>

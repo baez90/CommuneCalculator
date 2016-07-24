@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="CommuneCalculator.Pages.Auswertung.BewohnerAuswertung"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+             x:Name="ucBewohnerAuswertung"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300">
+    <Grid Style="{StaticResource ContentRoot}" DataContext="{Binding ElementName=ucBewohnerAuswertung}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Text="Anfangsdatum" Margin="10 0 10 0" />
+            <DatePicker Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left"
+                        SelectedDate="{Binding StartDatum, UpdateSourceTrigger=PropertyChanged}"
+                        VerticalAlignment="Center" />
+            <TextBlock Grid.Row="0" Grid.Column="2" HorizontalAlignment="Left" VerticalAlignment="Center"
+                       Text="Enddatum" Margin="10 0 10 0" />
+            <DatePicker x:Name="Enddatum" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Left"
+                        SelectedDate="{Binding EndDatum, UpdateSourceTrigger=PropertyChanged}"
+                        VerticalAlignment="Center" />
+        </StackPanel>
+        <chartingToolkit:Chart Grid.Row="1" Title="Ausgaben nach Bewohner" LegendTitle="Bewohner" Margin="0 10 0 0">
+            <chartingToolkit:Chart.Series>
+                <chartingToolkit:PieSeries ItemsSource="{Binding BewohnerAusgaben}" IndependentValuePath="Bewohner"
+                                           DependentValuePath="Betrag" />
+            </chartingToolkit:Chart.Series>
+        </chartingToolkit:Chart>
+    </Grid>
+</UserControl>

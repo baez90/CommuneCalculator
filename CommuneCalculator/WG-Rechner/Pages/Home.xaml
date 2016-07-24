@@ -1,0 +1,46 @@
+﻿<base:DisposableUserControl x:Class="CommuneCalculator.Pages.Home"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:base="clr-namespace:CommuneCalculator.Pages.Base"
+             mc:Ignorable="d"
+             d:DesignHeight="300" d:DesignWidth="300"
+             DataContext="{Binding Home, Source={StaticResource Locator}}">
+    <UserControl.Resources>
+        <Style TargetType="Button">
+            <Setter Property="FontSize" Value="30" />
+            <Setter Property="FontWeight" Value="Bold" />
+            <Setter Property="Margin" Value="10" />
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" Grid.Column="0" Content="Belege" Command="{Binding NavigateToPurchasesCommand}">
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Kassenbeleg_erfassen.jpg"
+                            Stretch="Fill" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="0" Grid.Column="1" Content="Bewohner" Command="{Binding NavigateToRoommatesCommand}">
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Mitbewohner.jpg" Stretch="Fill" />
+            </Button.Background>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Content="Auswertung"
+                Command="{Binding NavigateToStatsCommand}">
+            <Button.Background>
+                <ImageBrush ImageSource="pack://application:,,,/Resources/Images/Auswertung.jpg" Stretch="Fill" />
+            </Button.Background>
+        </Button>
+
+    </Grid>
+</base:DisposableUserControl>

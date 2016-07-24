@@ -1,0 +1,35 @@
+﻿<base:DisposableUserControl x:Class="CommuneCalculator.Pages.Purchases.Overview.PurchasesOverview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+             xmlns:base="clr-namespace:CommuneCalculator.Pages.Base"
+             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="800">
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <TextBlock Text="Belegübersicht: " FontSize="24" />
+        <DataGrid Grid.Row="1" Name="gridBelege" AutoGenerateColumns="False" CanUserReorderColumns="True"
+                  CanUserResizeColumns="True"
+                  CanUserResizeRows="False" CanUserSortColumns="True" AlternatingRowBackground="Gainsboro"
+                  AlternationCount="2">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Kategorie" Binding="{Binding Kategorie}" />
+                <DataGridTextColumn Header="Datum"
+                                    Binding="{Binding Datum,StringFormat={}{0:dddd dd MMMM},ConverterCulture=de-DE}" />
+                <DataGridTextColumn Header="Betrag" Binding="{Binding Betrag,StringFormat={}{0} €}" />
+                <DataGridTextColumn Header="Erstellt von" Binding="{Binding BewohnerEntity.Login}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="2" Content="Neuen Beleg erfassen" HorizontalAlignment="Left"
+                Margin="10" />
+        <Button Grid.Row="0" Content="Aktualisieren" HorizontalAlignment="Right" />
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Abbrechen" HorizontalAlignment="Right" Margin="10" />
+        </StackPanel>
+    </Grid>
+</base:DisposableUserControl>

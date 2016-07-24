@@ -1,0 +1,7 @@
+﻿AusgabenVerlauf.xaml;
+BelegAuswertung.xaml;
+BewohnerAuswertung.xaml;
+KategorieAuswertung.xaml;
+BewohnerAnlegen.xaml;
+BewohnerBearbeiten.xaml;
+BewohnerUebersicht.xaml
