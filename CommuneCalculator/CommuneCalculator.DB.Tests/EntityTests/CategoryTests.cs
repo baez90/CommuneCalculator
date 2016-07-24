@@ -19,7 +19,7 @@ namespace CommuneCalculator.DB.Tests.EntityTests
         [Test(Author = "Peter Kurfer", TestOf = typeof(Category), Description = "Test if Shops collection is initialized correctly")]
         public void TestGetShops_ShouldNotReturnNull()
         {
-            NotNull(_testCategory.Shops);
+            IsNotNull(_testCategory.Shops);
         }
     }
 }

@@ -5,7 +5,7 @@
         private Optional(T value)
         {
             Value = value;
-            HasValue = value != null;
+            HasValue = value != null && !value.Equals(default(T));
         }
 
         public T Value { get; }
