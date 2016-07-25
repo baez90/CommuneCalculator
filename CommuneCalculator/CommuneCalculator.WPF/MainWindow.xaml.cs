@@ -1,11 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Linq;
-using System.Windows;
-using System.Windows.Media;
-using CommuneCalculator.Utils;
-using FirstFloor.ModernUI.Windows.Controls;
-using FirstFloor.ModernUI.Windows.Navigation;
+﻿using FirstFloor.ModernUI.Windows.Controls;
 
 namespace CommuneCalculator
 {
@@ -54,7 +47,5 @@ namespace CommuneCalculator
         //        }
         //    };
         //}
-
-        
     }
 }

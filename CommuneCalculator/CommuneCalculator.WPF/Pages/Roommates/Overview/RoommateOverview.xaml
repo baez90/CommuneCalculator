@@ -12,7 +12,7 @@
                             DataContext="{Binding RoommateOverview, Source={StaticResource Locator}}">
     <i:Interaction.Triggers>
         <i:EventTrigger EventName="Loaded">
-            <command:EventToCommand Command="{Binding UpdateCommand}"/>
+            <command:EventToCommand Command="{Binding UpdateCommand}" />
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <base:DisposableUserControl.Resources>
@@ -29,40 +29,52 @@
                   CanUserResizeRows="False" CanUserSortColumns="True" AlternatingRowBackground="LightBlue"
                   AlternationCount="2" ItemsSource="{Binding Roommates}">
             <DataGrid.Resources>
-                <utils:DataContextProxy x:Key="Proxy" Data="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}}" />
+                <utils:DataContextProxy x:Key="Proxy"
+                                        Data="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}}" />
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.FirstNameColHeader}" Binding="{Binding FirstName}" />
-                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.LastNameColHeader}" Binding="{Binding LastName}" />
-                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.MoveInDateColHeader}" Binding="{Binding MoveInDate,StringFormat={}{0:dddd dd MMMM yyyy},ConverterCulture=de-DE}" />
-                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.MoveOutColHeader}" Binding="{Binding MoveOutDate,StringFormat={}{0:dddd dd MMMM yyyy},ConverterCulture=de-DE, TargetNullValue='{x:Static i18N:RoommateOverviewI18n.MoveOutColTargetNull}'}" />
-                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.LoginColHeader}" Binding="{Binding Login}" />
+                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.FirstNameColHeader}"
+                                    Binding="{Binding FirstName}" />
+                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.LastNameColHeader}"
+                                    Binding="{Binding LastName}" />
+                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.MoveInDateColHeader}"
+                                    Binding="{Binding MoveInDate,StringFormat={}{0:dddd dd MMMM yyyy},ConverterCulture=de-DE}" />
+                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.MoveOutColHeader}"
+                                    Binding="{Binding MoveOutDate,StringFormat={}{0:dddd dd MMMM yyyy},ConverterCulture=de-DE, TargetNullValue='{x:Static i18N:RoommateOverviewI18n.MoveOutColTargetNull}'}" />
+                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.LoginColHeader}"
+                                    Binding="{Binding Login}" />
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
-                    <MenuItem Header="{x:Static i18N:RoommateOverviewI18n.EditRoommateCtxMenuItem}" Command="{Binding EditRoommateCommand}" CommandParameter="{Binding Data.SelectedItem, Source={StaticResource Proxy}}"/>
+                    <MenuItem Header="{x:Static i18N:RoommateOverviewI18n.EditRoommateCtxMenuItem}"
+                              Command="{Binding EditRoommateCommand}"
+                              CommandParameter="{Binding Data.SelectedItem, Source={StaticResource Proxy}}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
             <DataGrid.RowDetailsTemplate>
                 <DataTemplate>
                     <Grid>
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
-                        <DataGrid/>
+                        <DataGrid />
                         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Content="Abwesenheit hinzufügen" Style="{StaticResource CommonButton}" Margin="0 10 10 10"/>
+                            <Button Content="Abwesenheit hinzufügen" Style="{StaticResource CommonButton}"
+                                    Margin="0 10 10 10" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
             </DataGrid.RowDetailsTemplate>
         </DataGrid>
-        
+
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Command="{Binding SwitchToCreateRoommateView}" Content="{x:Static i18N:RoommateOverviewI18n.CreateRoommateBtnLbl}" Margin="0,65,0,10" Style="{StaticResource CommonButton}"/>
+            <Button Command="{Binding SwitchToCreateRoommateView}"
+                    Content="{x:Static i18N:RoommateOverviewI18n.CreateRoommateBtnLbl}" Margin="0,65,0,10"
+                    Style="{StaticResource CommonButton}" />
         </StackPanel>
 
-        <Image Source="pack://application:,,,/Resources/Images/banner-haus.jpg" Stretch="Fill" Margin="0,0,0,10" Grid.Row="2" />
+        <Image Source="pack://application:,,,/Resources/Images/banner-haus.jpg" Stretch="Fill" Margin="0,0,0,10"
+               Grid.Row="2" />
     </Grid>
 </base:DisposableUserControl>

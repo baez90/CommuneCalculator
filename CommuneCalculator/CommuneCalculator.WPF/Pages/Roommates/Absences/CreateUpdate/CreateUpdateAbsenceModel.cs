@@ -10,9 +10,9 @@ namespace CommuneCalculator.Pages.Roommates.Absences.CreateUpdate
 {
     public class CreateUpdateAbsenceModel : ViewModelBase
     {
+        private readonly IDataRepo<AbsenceTime> _absenceRepo;
 
         private bool _isInEditMode;
-        private readonly IDataRepo<AbsenceTime> _absenceRepo;
 
         public CreateUpdateAbsenceModel(IDataRepo<AbsenceTime> absenceRepo)
         {

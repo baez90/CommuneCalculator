@@ -11,7 +11,6 @@ namespace CommuneCalculator.IoC
     {
         protected override void Load(ContainerBuilder builder)
         {
-
             builder.Register(context => new ComCalcContext())
                 .As<DbContext>()
                 .AsSelf()

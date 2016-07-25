@@ -8,6 +8,7 @@ using CommuneCalculator.DB.DataAccess;
 using CommuneCalculator.DB.Entities;
 using CommuneCalculator.EntityViewModels;
 using CommuneCalculator.Navigation;
+using CommuneCalculator.Pages.Roommates.CreateUpdate;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -15,9 +16,9 @@ namespace CommuneCalculator.Pages.Roommates.Overview
 {
     public class RoommateOverviewModel : ViewModelBase
     {
+        private readonly INavigator _navigator;
 
         private readonly IDataRepo<Roommate> _roommateRepo;
-        private readonly INavigator _navigator;
         private ObservableCollection<RoommateModel> _roommates;
 
         public RoommateOverviewModel(IDataRepo<Roommate> roommateRepo, INavigator navigator)
@@ -40,16 +41,6 @@ namespace CommuneCalculator.Pages.Roommates.Overview
 
         #endregion
 
-        #region Commands
-
-        public ICommand UpdateCommand => new RelayCommand(async () => await UpdateRoommates());
-
-        public ICommand SwitchToCreateRoommateView => new RelayCommand(() => _navigator.NavigateTo<CreateUpdate.CreateUpdateRoommate>());
-
-        public ICommand EditRoommateCommand => new RelayCommand<RoommateModel>(model => _navigator.NavigateTo<CreateUpdate.CreateUpdateRoommate, RoommateModel>(model));
-
-        #endregion
-
         #region private methods
 
         private async Task UpdateRoommates()
@@ -59,11 +50,18 @@ namespace CommuneCalculator.Pages.Roommates.Overview
                 Entity = roommate
             }).ToListAsync();
 
-            Application.Current.Dispatcher.Invoke(() =>
-            {
-                Roommates = new ObservableCollection<RoommateModel>(roommates);
-            });
+            Application.Current.Dispatcher.Invoke(() => { Roommates = new ObservableCollection<RoommateModel>(roommates); });
         }
+
+        #endregion
+
+        #region Commands
+
+        public ICommand UpdateCommand => new RelayCommand(async () => await UpdateRoommates());
+
+        public ICommand SwitchToCreateRoommateView => new RelayCommand(() => _navigator.NavigateTo<CreateUpdateRoommate>());
+
+        public ICommand EditRoommateCommand => new RelayCommand<RoommateModel>(model => _navigator.NavigateTo<CreateUpdateRoommate, RoommateModel>(model));
 
         #endregion
     }

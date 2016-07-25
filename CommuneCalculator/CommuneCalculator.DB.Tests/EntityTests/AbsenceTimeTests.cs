@@ -8,20 +8,13 @@ namespace CommuneCalculator.DB.Tests.EntityTests
     [TestFixture]
     public class AbsenceTimeTests
     {
-
-        private AbsenceTime _testAbsenceTime;
-
         [SetUp]
         public void SetupTests()
         {
             _testAbsenceTime = new AbsenceTime();
         }
 
-        [Test(Author = "Peter Kurfer", TestOf = typeof(AbsenceTime))]
-        public void TestGetRoommate_ShouldReturnNull()
-        {
-            IsNull(_testAbsenceTime.Roommate);
-        }
+        private AbsenceTime _testAbsenceTime;
 
         [Test(Author = "Peter Kurfer", TestOf = typeof(AbsenceTime))]
         public void TestGetAbsenceStart_ShouldReturnValueGreaterThanYesterday()
@@ -33,6 +26,12 @@ namespace CommuneCalculator.DB.Tests.EntityTests
         public void TestGetAbsendeEnd_ShouldReturnValueGreaterThanToday()
         {
             Greater(_testAbsenceTime.AbsenceEnd, DateTime.Today);
+        }
+
+        [Test(Author = "Peter Kurfer", TestOf = typeof(AbsenceTime))]
+        public void TestGetRoommate_ShouldReturnNull()
+        {
+            IsNull(_testAbsenceTime.Roommate);
         }
     }
 }

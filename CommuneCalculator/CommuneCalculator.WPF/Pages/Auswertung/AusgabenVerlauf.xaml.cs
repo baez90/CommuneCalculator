@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using CommuneCalculator.Pages.Base;
+﻿using CommuneCalculator.Pages.Base;
 
 namespace CommuneCalculator.Pages.Auswertung
 {
@@ -15,7 +14,6 @@ namespace CommuneCalculator.Pages.Auswertung
 
         protected override void OnDisposing()
         {
-            
         }
     }
 }

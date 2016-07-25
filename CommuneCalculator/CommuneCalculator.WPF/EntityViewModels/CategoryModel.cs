@@ -6,7 +6,6 @@ namespace CommuneCalculator.EntityViewModels
 {
     public class CategoryModel : EntityViewModelBase<Category>
     {
-
         private ObservableCollection<ShopModel> _shopsProxy;
 
         public int CategoryId => Entity.CategoryId;

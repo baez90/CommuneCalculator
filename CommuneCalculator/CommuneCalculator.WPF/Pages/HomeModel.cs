@@ -1,11 +1,10 @@
 ﻿using System.Windows.Input;
 using CommuneCalculator.Navigation;
 using CommuneCalculator.Pages.Auswertung;
-using CommuneCalculator.Pages.Purchases;
+using CommuneCalculator.Pages.Purchases.Overview;
 using CommuneCalculator.Pages.Roommates.Overview;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
-using PurchasesOverview = CommuneCalculator.Pages.Purchases.Overview.PurchasesOverview;
 
 namespace CommuneCalculator.Pages
 {

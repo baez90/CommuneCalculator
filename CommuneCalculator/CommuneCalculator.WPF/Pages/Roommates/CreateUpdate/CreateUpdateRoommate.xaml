@@ -3,15 +3,12 @@
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                            xmlns:converters="clr-namespace:CommuneCalculator.Converters"
                             xmlns:base="clr-namespace:CommuneCalculator.Pages.Base"
                             xmlns:i18N="clr-namespace:CommuneCalculator.Pages.Roommates.CreateUpdate"
                             mc:Ignorable="d" d:DesignHeight="407.657" d:DesignWidth="553.714"
                             DataContext="{Binding CreateRoommate, Source={StaticResource Locator}}">
     <base:DisposableUserControl.Resources>
         <ResourceDictionary>
-            <converters:PasswordRequestConverter x:Key="PasswordRequestConverter" />
-
             <i18N:CreateUpdateRoommateI18n x:Key="I18N" />
 
             <Style TargetType="Label" x:Key="DescrLabel" BasedOn="{StaticResource CommonTbxLbl}">
@@ -22,8 +19,8 @@
                 <Setter Property="Margin" Value="0, 15, 35, 0" />
             </Style>
             <Style TargetType="Button" x:Key="DefaultBtn" BasedOn="{StaticResource CommonButton}">
-                <Setter Property="Margin" Value="0, 10, 10, 10"/>
-                <Setter Property="Padding" Value="5"/>
+                <Setter Property="Margin" Value="0, 10, 10, 10" />
+                <Setter Property="Padding" Value="5" />
             </Style>
         </ResourceDictionary>
     </base:DisposableUserControl.Resources>
@@ -32,9 +29,6 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -58,20 +52,10 @@
 
         <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding Roommate.FirstName}" Style="{StaticResource TbxStyle}" />
 
-        <Label Grid.Row="1" Grid.Column="2" Content="{Binding LoginLbl, Source={StaticResource I18N}, Mode=OneTime}"
-               Style="{StaticResource DescrLabel}" />
-
-        <TextBox Text="{Binding Roommate.Login}" Grid.Column="3" Grid.Row="1" Style="{StaticResource TbxStyle}" />
-
         <Label Grid.Row="2" Grid.Column="0" Content="{Binding LastNameLbl, Source={StaticResource I18N}, Mode=OneTime}"
                Style="{StaticResource DescrLabel}" />
 
         <TextBox Text="{Binding Roommate.LastName}" Grid.Column="1" Grid.Row="2" Style="{StaticResource TbxStyle}" />
-
-        <Label Grid.Row="2" Grid.Column="2" Content="{Binding PasswordLbl, Source={StaticResource I18N}, Mode=OneTime}"
-               Style="{StaticResource DescrLabel}" />
-
-        <PasswordBox x:Name="Password" Grid.Column="3" Margin="0,15,35,0" Grid.Row="2" FontSize="15" />
 
         <Label Grid.Row="3" Grid.Column="0"
                Content="{Binding MoveInDateLbl, Source={StaticResource I18N}, Mode=OneTime}"
@@ -87,28 +71,14 @@
         <DatePicker SelectedDate="{Binding Roommate.MoveOutDate}" Grid.Column="1" Margin="0,15,35,0" Grid.Row="4"
                     FontSize="15" />
 
-        <Label Grid.Row="3" Grid.Column="2"
-               Content="{Binding PasswordRepeatLbl, Source={StaticResource I18N}, Mode=OneTime}"
-               Style="{StaticResource DescrLabel}" />
-
-        <PasswordBox x:Name="PasswordRepeat" Grid.Column="3" Margin="0,15,35,0" Grid.Row="3" FontSize="15" />
-
-        <CheckBox Content="{Binding IsTreasurerLvl, Source={StaticResource I18N}, Mode=OneTime}" Grid.Column="2"
-                  HorizontalAlignment="Left" Margin="5,15,0,0" Grid.Row="4" FontSize="15" FontWeight="Bold" />
-
-        <StackPanel Grid.Column="3" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right"
+        <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right"
                     VerticalAlignment="Center">
             <Button Content="{Binding SaveBtnContent, Source={StaticResource I18N}, Mode=OneTime}"
                     Style="{StaticResource DefaultBtn}"
                     Command="{Binding SaveRoommateCommand}">
-                <Button.CommandParameter>
-                    <MultiBinding Converter="{StaticResource PasswordRequestConverter}">
-                        <Binding ElementName="Password" />
-                        <Binding ElementName="PasswordRepeat" />
-                    </MultiBinding>
-                </Button.CommandParameter>
             </Button>
-            <Button Content="{Binding CancelBtnContent, Source={StaticResource I18N}, Mode=OneTime}" Style="{StaticResource DefaultBtn}" />
+            <Button Content="{Binding CancelBtnContent, Source={StaticResource I18N}, Mode=OneTime}"
+                    Style="{StaticResource DefaultBtn}" />
         </StackPanel>
 
         <Image Source="pack://application:,,,/Resources/Images/banner-haus.jpg" Grid.Column="0" Grid.ColumnSpan="4"

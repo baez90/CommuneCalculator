@@ -36,26 +36,6 @@ namespace CommuneCalculator.EntityViewModels
             }
         }
 
-        public string Login
-        {
-            get { return Entity.Login; }
-            set
-            {
-                Entity.Login = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        public bool IsTreasurer
-        {
-            get { return Entity.IsTreasurer; }
-            set
-            {
-                Entity.IsTreasurer = value;
-                RaisePropertyChanged();
-            }
-        }
-
         public DateTime MoveInDate
         {
             get { return Entity.MoveInDate; }

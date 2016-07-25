@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
 using CommuneCalculator.DB.Entities;
-using CryptSharp;
 
 namespace CommuneCalculator.DB.DbUtils
 {
@@ -12,11 +11,8 @@ namespace CommuneCalculator.DB.DbUtils
             context.Roommates.Add(new Roommate
             {
                 MoveInDate = DateTime.Today,
-                IsTreasurer = true,
-                Login = "admin",
                 FirstName = "admin",
-                LastName = "admin",
-                PasswordHash = Crypter.Blowfish.Crypt("1n1t-R00t!")
+                LastName = "admin"
             });
 
             context.SaveChanges();
