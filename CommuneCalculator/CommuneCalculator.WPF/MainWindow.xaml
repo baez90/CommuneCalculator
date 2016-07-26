@@ -7,17 +7,16 @@
                   Icon="pack://application:,,,/Resources/Images/Kassenbeleg_erfassen.jpg"
                   ContentSource="/Pages/Home.xaml"
                   DataContext="{Binding Source={StaticResource Locator}, Path=Main}">
-
     <mui:ModernWindow.MenuLinkGroups>
         <mui:LinkGroup DisplayName="Home">
             <mui:LinkGroup.Links>
                 <mui:Link DisplayName="home" Source="/Pages/Home.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
-        <mui:LinkGroup DisplayName="Belege">
+        <mui:LinkGroup DisplayName="Purchases">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Beleg erfassen" Source="/Pages/Belege/BelegErfassen.xaml" />
-                <mui:Link DisplayName="Beleg Übersicht" Source="/Pages/Belege/BelegUebersicht.xaml" />
+                <mui:Link DisplayName="Beleg erfassen" Source="/Pages/Purchases/Create/CreatePurchase.xaml" />
+                <mui:Link DisplayName="Beleg Übersicht" Source="/Pages/Purchases/Overview/PurchasesOverview.xaml" />
 
             </mui:LinkGroup.Links>
         </mui:LinkGroup>

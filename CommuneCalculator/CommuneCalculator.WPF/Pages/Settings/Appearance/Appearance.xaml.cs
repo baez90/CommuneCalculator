@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace WG_Rechner.Pages.Settings
+namespace CommuneCalculator.Pages.Settings.Appearance
 {
     /// <summary>
     ///     Interaction logic for Appearance.xaml

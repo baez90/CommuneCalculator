@@ -3,7 +3,7 @@ using System.Linq;
 using System.Windows.Media;
 using FirstFloor.ModernUI.Presentation;
 
-namespace WG_Rechner.Pages.Settings
+namespace CommuneCalculator.Pages.Settings.Appearance
 {
     /// <summary>
     ///     A simple view model for configuring theme, font and accent colors.

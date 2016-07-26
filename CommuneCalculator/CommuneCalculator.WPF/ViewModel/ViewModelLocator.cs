@@ -1,23 +1,10 @@
-/*
-  In App.xaml:
-  <Application.Resources>
-      <vm:ViewModelLocator xmlns:vm="clr-namespace:WG_Rechner"
-                           x:Key="Locator" />
-  </Application.Resources>
-  
-  In the View:
-  DataContext="{Binding Source={StaticResource Locator}, Path=ViewModelName}"
-
-  You can also use Blend to do all this with the tool's support.
-  See http://www.galasoft.ch/mvvm
-*/
-
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommuneCalculator.Pages;
 using CommuneCalculator.Pages.Roommates.Absences.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.Overview;
+using CommuneCalculator.Pages.Settings.DbChooser;
 using Microsoft.Practices.ServiceLocation;
 
 namespace CommuneCalculator.ViewModel
@@ -45,6 +32,8 @@ namespace CommuneCalculator.ViewModel
         public RoommateOverviewModel RoommateOverview => AppContext.Container.Resolve<RoommateOverviewModel>();
 
         public CreateUpdateAbsenceModel CreateUpdateAbsence => AppContext.Container.Resolve<CreateUpdateAbsenceModel>();
+
+        public DbChooserModel DbChooser => AppContext.Container.Resolve<DbChooserModel>();
 
         public static void Cleanup()
         {

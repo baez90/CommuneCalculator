@@ -6,6 +6,7 @@ using CommuneCalculator.Pages;
 using CommuneCalculator.Pages.Roommates.Absences.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.Overview;
+using CommuneCalculator.Pages.Settings.DbChooser;
 using CommuneCalculator.ViewModel;
 
 namespace CommuneCalculator.IoC
@@ -33,6 +34,10 @@ namespace CommuneCalculator.IoC
             builder.Register(context => new CreateUpdateAbsenceModel(context.Resolve<IDataRepo<AbsenceTime>>()))
                 .AsSelf()
                 .InstancePerDependency();
+
+            builder.Register(context => new DbChooserModel())
+                .AsSelf()
+                .SingleInstance();
         }
     }
 }
