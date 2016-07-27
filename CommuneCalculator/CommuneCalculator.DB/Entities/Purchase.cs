@@ -14,19 +14,10 @@ namespace CommuneCalculator.DB.Entities
         [Column(TypeName = "datetime")]
         public DateTime PurchaseDate { get; set; } = DateTime.Today;
         
-        public int CategoryRefId { get; set; }
-
-        [ForeignKey(nameof(CategoryRefId))]
         public virtual Category Category { get; set; }
         
-        public int ShopRefId { get; set; }
-
-        [ForeignKey(nameof(ShopRefId))]
         public virtual Shop Shop { get; set; }
         
-        public int PurchasedByRefId { get; set; }
-
-        [ForeignKey(nameof(PurchasedByRefId))]
         public virtual Roommate PurchasedBy { get; set; }
     }
 }

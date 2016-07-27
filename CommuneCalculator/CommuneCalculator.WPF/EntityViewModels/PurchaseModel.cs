@@ -42,6 +42,7 @@ namespace CommuneCalculator.EntityViewModels
             }
             set
             {
+                if(value == null) return;
                 _categoryProxy = value;
                 Entity.Category = _categoryProxy.Entity;
                 RaisePropertyChanged();

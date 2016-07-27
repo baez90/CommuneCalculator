@@ -8,7 +8,7 @@ namespace CommuneCalculator.EntityViewModels
 
         public string Name
         {
-            get { return Entity.Name; }
+            get { return Entity == null ? "" : Entity.Name; }
             set
             {
                 Entity.Name = value;

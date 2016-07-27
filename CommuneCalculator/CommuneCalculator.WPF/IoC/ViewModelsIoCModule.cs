@@ -27,7 +27,11 @@ namespace CommuneCalculator.IoC
                 .AsSelf()
                 .SingleInstance();
 
-            builder.Register(context => new CreatePurchaseModel(context.Resolve<INavigator>(), context.Resolve<IDataRepo<Roommate>>()))
+            builder.Register(context => new CreatePurchaseModel(
+                context.Resolve<INavigator>(),
+                context.Resolve<IDataRepo<Roommate>>(),
+                context.Resolve<IDataRepo<Purchase>>(),
+                context.Resolve<IDataRepo<Shop>>()))
                 .AsSelf()
                 .InstancePerDependency();
 
@@ -43,7 +47,7 @@ namespace CommuneCalculator.IoC
                 .AsSelf()
                 .SingleInstance();
 
-            builder.Register(context => new CreateShopModel())
+            builder.Register(context => new CreateShopModel(context.Resolve<INavigator>(), context.Resolve<IDataRepo<Shop>>()))
                 .AsSelf()
                 .InstancePerDependency();
 

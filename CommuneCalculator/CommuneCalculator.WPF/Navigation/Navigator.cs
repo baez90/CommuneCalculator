@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Threading;
+using System.Windows;
 using Autofac;
 using CommuneCalculator.Pages.Base;
 using CommuneCalculator.Utils;

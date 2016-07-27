@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 using CommuneCalculator.DB.DataAccess;
 using CommuneCalculator.DB.Entities;
@@ -8,6 +10,7 @@ using CommuneCalculator.EntityViewModels;
 using CommuneCalculator.Navigation;
 using CommuneCalculator.Pages.Purchases.Overview;
 using CommuneCalculator.ViewModel;
+using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.CommandWpf;
 
 namespace CommuneCalculator.Pages.Purchases.Create
@@ -16,17 +19,23 @@ namespace CommuneCalculator.Pages.Purchases.Create
     {
         private readonly INavigator _navigator;
         private readonly IDataRepo<Roommate> _roommatesRepo;
-        private List<RoommateModel> _roommates;
+        private readonly IDataRepo<Purchase> _purchasesRepo;
+        private readonly IDataRepo<Shop> _shopsRepo;
 
-        public CreatePurchaseModel(INavigator navigator, IDataRepo<Roommate> roommatesRepo)
+        private List<RoommateModel> _roommates;
+        private List<ShopModel> _shops;
+
+        public CreatePurchaseModel(INavigator navigator, IDataRepo<Roommate> roommatesRepo, IDataRepo<Purchase> purchasesRepo, IDataRepo<Shop> shopsRepo)
         {
             _navigator = navigator;
             _roommatesRepo = roommatesRepo;
+            _purchasesRepo = purchasesRepo;
+            _shopsRepo = shopsRepo;
 
             SaveCommand = new RelayCommand(async () => await SavePurchase());
             CancelCommand = new RelayCommand(() => _navigator.NavigateTo<PurchasesOverview>());
 
-            Initialize();
+            Task.Run(async () => await InitializeAsync()).ConfigureAwait(false);
         }
 
         #region Commands
@@ -39,16 +48,27 @@ namespace CommuneCalculator.Pages.Purchases.Create
 
         #region private methods
 
-        private void Initialize()
+        private async Task InitializeAsync()
         {
-            var initTask = Task.Run(() => { return _roommatesRepo.All().Select(roommate => new RoommateModel {Entity = roommate}).ToList(); });
-            initTask.ConfigureAwait(false);
-            initTask.ContinueWith(task => { Roommates = task.Result; }, TaskScheduler.FromCurrentSynchronizationContext());
+            var roommates = await _roommatesRepo.All().Select(roommate => new RoommateModel {Entity = roommate}).ToListAsync();
+            var shops = await _shopsRepo.All().Select(shop => new ShopModel {Entity = shop}).ToListAsync();
+
+            Application.Current.Dispatcher.Invoke(() =>
+            {
+                Roommates = roommates;
+                Shops = shops;
+            });
         }
 
         private async Task SavePurchase()
         {
-            
+            if (Purchase.ValidPropertiesCount != Purchase.TotalPropertiesWithValidationCount)
+            {
+                ModernDialog.ShowMessage("There are validation errors", "Validation error", MessageBoxButton.OK);
+                return;
+            }
+            await _purchasesRepo.CreateEntityAsync(Purchase.Entity);
+            _navigator.NavigateTo<PurchasesOverview>();
         }
 
         #endregion
@@ -61,6 +81,16 @@ namespace CommuneCalculator.Pages.Purchases.Create
             set
             {
                 _roommates = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public List<ShopModel> Shops
+        {
+            get { return _shops; }
+            set
+            {
+                _shops = value;
                 RaisePropertyChanged();
             }
         }

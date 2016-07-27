@@ -36,6 +36,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
@@ -55,17 +56,24 @@
                   ItemsSource="{Binding Roommates}" SelectedItem="{Binding Purchase.PurchasedBy, Mode=OneWayToSource}"/>
         
         <Label Grid.Row="3" Grid.Column="1" Content="Geschäft:" />
-        <ComboBox Grid.Row="3" Grid.Column="2" SelectedItem="{Binding Purchase.Shop, Mode=OneWayToSource}" />
+        <ComboBox Grid.Row="3" Grid.Column="2" DisplayMemberPath="ShopName"
+                  SelectedIndex="0"
+                  ItemsSource="{Binding Shops}"
+                  SelectedItem="{Binding Purchase.Shop, Mode=OneWayToSource}" />
         
-        <Label Grid.Row="4" Grid.Column="1" Content="Betrag:" />
-        <TextBox Grid.Row="4" Grid.Column="2"
+        <Label Grid.Row="4" Grid.Column="1" Content="Kategorie:" />
+        <ComboBox Grid.Row="4" Grid.Column="2" DisplayMemberPath="Name"
+                  SelectedItem="{Binding Purchase.Category, Mode=OneWayToSource}"/>
+        
+        <Label Grid.Row="5" Grid.Column="1" Content="Betrag:" />
+        <TextBox Grid.Row="5" Grid.Column="2"
                  Text="{Binding Purchase.Amount, ValidatesOnDataErrors=True}"
                  ToolTip="{Binding Path=(Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource Self}}"/>
         
-        <Label Grid.Row="5" Grid.Column="1" Content="Datum:" />
-        <DatePicker Grid.Row="5" Grid.Column="2" Margin="10" />
+        <Label Grid.Row="6" Grid.Column="1" Content="Datum:" />
+        <DatePicker Grid.Row="6" Grid.Column="2" Margin="10" />
         
-        <StackPanel Grid.Row="7" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" Grid.ColumnSpan="4">
+        <StackPanel Grid.Row="8" Grid.Column="0" Orientation="Horizontal" HorizontalAlignment="Right" Grid.ColumnSpan="4">
             <mui:ModernButton Content="Speichern"
                               Command="{Binding SaveCommand}"
                               IconData="{Binding Data, Source={StaticResource Content-Save}}"/>
