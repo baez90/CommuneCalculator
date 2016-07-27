@@ -1,4 +1,4 @@
-﻿<base:DisposableUserControl x:Class="CommuneCalculator.Pages.Shops.CreateShop.CreateShopControl"
+﻿<base:DisposableUserControl x:Class="CommuneCalculator.Pages.Shops.Create.CreateShop"
                             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"

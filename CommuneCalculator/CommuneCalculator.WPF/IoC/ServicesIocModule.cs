@@ -28,6 +28,10 @@ namespace CommuneCalculator.IoC
                 .As<IDataRepo<Shop>>()
                 .SingleInstance();
 
+            builder.Register(context => new BaseDataRepo<Category>(context.Resolve<DbContext>()))
+                .As<IDataRepo<Category>>()
+                .SingleInstance();
+
             builder.Register(context => new Navigator())
                 .As<INavigator>()
                 .SingleInstance();

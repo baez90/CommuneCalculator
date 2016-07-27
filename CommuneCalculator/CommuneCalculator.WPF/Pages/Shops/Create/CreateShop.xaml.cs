@@ -1,13 +1,13 @@
 ﻿using CommuneCalculator.Pages.Base;
 
-namespace CommuneCalculator.Pages.Shops.CreateShop
+namespace CommuneCalculator.Pages.Shops.Create
 {
     /// <summary>
-    ///     Interaction logic for CreateShopControl.xaml
+    ///     Interaction logic for CreateShop.xaml
     /// </summary>
-    public partial class CreateShopControl : DisposableUserControl
+    public partial class CreateShop : DisposableUserControl
     {
-        public CreateShopControl()
+        public CreateShop()
         {
             InitializeComponent();
         }

@@ -7,10 +7,11 @@ using CommuneCalculator.DB.DataAccess;
 using CommuneCalculator.DB.Entities;
 using CommuneCalculator.EntityViewModels;
 using CommuneCalculator.Navigation;
+using CommuneCalculator.Pages.Shops.Create;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
-namespace CommuneCalculator.Pages.Shops.ShopOverview
+namespace CommuneCalculator.Pages.Shops.Overview
 {
     public class ShopOverviewModel : ViewModelBase
     {
@@ -25,7 +26,7 @@ namespace CommuneCalculator.Pages.Shops.ShopOverview
             _shopsRepo = shopsRepo;
 
             UpdateCommand = new RelayCommand(async () => await UpdateShops());
-            AddShopCommand = new RelayCommand(() => _navigator.NavigateTo<CreateShop.CreateShopControl>());
+            AddShopCommand = new RelayCommand(() => _navigator.NavigateTo<CreateShop>());
 
             Task.Run(async () => await UpdateShops());
         }

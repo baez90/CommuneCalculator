@@ -3,11 +3,11 @@ using CommuneCalculator.DB.DataAccess;
 using CommuneCalculator.DB.Entities;
 using CommuneCalculator.EntityViewModels;
 using CommuneCalculator.Navigation;
+using CommuneCalculator.Pages.Shops.Overview;
 using CommuneCalculator.ViewModel;
-using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
-namespace CommuneCalculator.Pages.Shops.CreateShop
+namespace CommuneCalculator.Pages.Shops.Create
 {
     public class CreateShopModel : ValidateableViewModelBase
     {
@@ -19,7 +19,7 @@ namespace CommuneCalculator.Pages.Shops.CreateShop
             _navigator = navigator;
             _shopsRepo = shopsRepo;
 
-            CancelCommand = new RelayCommand(() => _navigator.NavigateTo<ShopOverview.ShopOverview>());
+            CancelCommand = new RelayCommand(() => _navigator.NavigateTo<ShopOverview>());
         }
 
         #region properties

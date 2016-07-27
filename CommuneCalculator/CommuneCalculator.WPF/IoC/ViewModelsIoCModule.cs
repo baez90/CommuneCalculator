@@ -3,14 +3,15 @@ using CommuneCalculator.DB.DataAccess;
 using CommuneCalculator.DB.Entities;
 using CommuneCalculator.Navigation;
 using CommuneCalculator.Pages;
+using CommuneCalculator.Pages.Categories.Create;
 using CommuneCalculator.Pages.Purchases.Create;
 using CommuneCalculator.Pages.Purchases.Overview;
 using CommuneCalculator.Pages.Roommates.Absences.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.Overview;
 using CommuneCalculator.Pages.Settings.DbChooser;
-using CommuneCalculator.Pages.Shops.CreateShop;
-using CommuneCalculator.Pages.Shops.ShopOverview;
+using CommuneCalculator.Pages.Shops.Create;
+using CommuneCalculator.Pages.Shops.Overview;
 using CommuneCalculator.ViewModel;
 
 namespace CommuneCalculator.IoC
@@ -31,7 +32,8 @@ namespace CommuneCalculator.IoC
                 context.Resolve<INavigator>(),
                 context.Resolve<IDataRepo<Roommate>>(),
                 context.Resolve<IDataRepo<Purchase>>(),
-                context.Resolve<IDataRepo<Shop>>()))
+                context.Resolve<IDataRepo<Shop>>(),
+                context.Resolve<IDataRepo<Category>>()))
                 .AsSelf()
                 .InstancePerDependency();
 
@@ -56,6 +58,10 @@ namespace CommuneCalculator.IoC
                 .SingleInstance();
 
             builder.Register(context => new CreateUpdateAbsenceModel(context.Resolve<IDataRepo<AbsenceTime>>()))
+                .AsSelf()
+                .InstancePerDependency();
+
+            builder.Register(context => new CreateCategoryModel())
                 .AsSelf()
                 .InstancePerDependency();
 

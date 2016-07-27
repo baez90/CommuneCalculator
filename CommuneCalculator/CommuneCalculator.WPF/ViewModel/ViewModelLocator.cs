@@ -1,14 +1,16 @@
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommuneCalculator.Pages;
+using CommuneCalculator.Pages.Categories.Create;
+using CommuneCalculator.Pages.Categories.Overview;
 using CommuneCalculator.Pages.Purchases.Create;
 using CommuneCalculator.Pages.Purchases.Overview;
 using CommuneCalculator.Pages.Roommates.Absences.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.Overview;
 using CommuneCalculator.Pages.Settings.DbChooser;
-using CommuneCalculator.Pages.Shops.CreateShop;
-using CommuneCalculator.Pages.Shops.ShopOverview;
+using CommuneCalculator.Pages.Shops.Create;
+using CommuneCalculator.Pages.Shops.Overview;
 using Microsoft.Practices.ServiceLocation;
 
 namespace CommuneCalculator.ViewModel
@@ -44,6 +46,10 @@ namespace CommuneCalculator.ViewModel
         public ShopOverviewModel ShopOverview => AppContext.Container.Resolve<ShopOverviewModel>();
 
         public CreateUpdateAbsenceModel CreateUpdateAbsence => AppContext.Container.Resolve<CreateUpdateAbsenceModel>();
+
+        public CreateCategoryModel CreateCategory => AppContext.Container.Resolve<CreateCategoryModel>();
+
+        public CategoryOverviewModel CategoryOverview => AppContext.Container.Resolve<CategoryOverviewModel>();
 
         public DbChooserModel DbChooser => AppContext.Container.Resolve<DbChooserModel>();
 

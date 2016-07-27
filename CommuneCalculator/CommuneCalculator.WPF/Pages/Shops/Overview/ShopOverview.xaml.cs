@@ -1,6 +1,6 @@
 ﻿using CommuneCalculator.Pages.Base;
 
-namespace CommuneCalculator.Pages.Shops.ShopOverview
+namespace CommuneCalculator.Pages.Shops.Overview
 {
     /// <summary>
     ///     Interaction logic for ShopOverview.xaml

@@ -119,6 +119,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppContext.cs" />
+    <Compile Include="Pages\Categories\Create\CreateCategory.xaml.cs">
+      <DependentUpon>CreateCategory.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Categories\Create\CreateCategoryModel.cs" />
+    <Compile Include="Pages\Categories\Overview\CategoryOverview.xaml.cs">
+      <DependentUpon>CategoryOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Categories\Overview\CategoryOverviewModel.cs" />
     <Compile Include="Pages\Purchases\Create\CreatePurchaseModel.cs" />
     <Compile Include="Pages\Purchases\Overview\PurchaseOverviewModel.cs" />
     <Compile Include="Pages\Settings\DbChooser\DbChooserDialog.xaml.cs">
@@ -167,20 +175,28 @@
     <Compile Include="Pages\Roommates\Overview\RoommateOverviewModel.cs" />
     <Compile Include="Pages\HomeModel.cs" />
     <Compile Include="Pages\Settings\DbChooser\DbChooserModel.cs" />
-    <Compile Include="Pages\Shops\CreateShop\CreateShopControl.xaml.cs">
-      <DependentUpon>CreateShopControl.xaml</DependentUpon>
+    <Compile Include="Pages\Shops\Create\CreateShop.xaml.cs">
+      <DependentUpon>CreateShop.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Shops\CreateShop\CreateShopModel.cs" />
-    <Compile Include="Pages\Shops\ShopOverview\ShopOverview.xaml.cs">
+    <Compile Include="Pages\Shops\Create\CreateShopModel.cs" />
+    <Compile Include="Pages\Shops\Overview\ShopOverview.xaml.cs">
       <DependentUpon>ShopOverview.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Shops\ShopOverview\ShopOverviewModel.cs" />
+    <Compile Include="Pages\Shops\Overview\ShopOverviewModel.cs" />
     <Compile Include="Utils\DataContextProxy.cs" />
     <Compile Include="Utils\ReflectionExtensions.cs" />
     <Compile Include="Utils\UserControlExtensions.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ValidateableViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
+    <Page Include="Pages\Categories\Create\CreateCategory.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Categories\Overview\CategoryOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\Settings\DbChooser\DbChooserDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -280,11 +296,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Shops\CreateShop\CreateShopControl.xaml">
+    <Page Include="Pages\Shops\Create\CreateShop.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Shops\ShopOverview\ShopOverview.xaml">
+    <Page Include="Pages\Shops\Overview\ShopOverview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
