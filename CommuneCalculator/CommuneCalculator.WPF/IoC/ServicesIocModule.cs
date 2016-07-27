@@ -20,6 +20,14 @@ namespace CommuneCalculator.IoC
                 .As<IDataRepo<Roommate>>()
                 .SingleInstance();
 
+            builder.Register(context => new BaseDataRepo<Purchase>(context.Resolve<DbContext>()))
+                .As<IDataRepo<Purchase>>()
+                .SingleInstance();
+
+            builder.Register(context => new BaseDataRepo<Shop>(context.Resolve<DbContext>()))
+                .As<IDataRepo<Shop>>()
+                .SingleInstance();
+
             builder.Register(context => new Navigator())
                 .As<INavigator>()
                 .SingleInstance();

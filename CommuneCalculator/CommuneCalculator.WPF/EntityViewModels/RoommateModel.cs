@@ -36,6 +36,8 @@ namespace CommuneCalculator.EntityViewModels
             }
         }
 
+        public string FullName => $"{LastName}, {FirstName}";
+
         public DateTime MoveInDate
         {
             get { return Entity.MoveInDate; }

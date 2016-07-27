@@ -23,5 +23,7 @@ namespace CommuneCalculator.DB.Entities
         public DateTime? MoveOutDate { get; set; } = null;
 
         public virtual ICollection<AbsenceTime> AbsenceTimes { get; set; } = new List<AbsenceTime>();
+
+        public virtual ICollection<Purchase> Purchases { get; set; } = new List<Purchase>();
     }
 }

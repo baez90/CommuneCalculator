@@ -9,7 +9,5 @@ namespace CommuneCalculator.DB.Entities
         public int CategoryId { get; set; }
 
         public string Name { get; set; }
-
-        public virtual ICollection<Shop> Shops { get; set; } = new List<Shop>();
     }
 }

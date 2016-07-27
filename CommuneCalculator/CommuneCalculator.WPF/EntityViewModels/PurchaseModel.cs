@@ -7,8 +7,9 @@ namespace CommuneCalculator.EntityViewModels
     {
         private CategoryModel _categoryProxy;
         private ShopModel _shopProxy;
+        private RoommateModel _roommateProxy;
 
-        public int ReceiptId => Entity.ReceiptId;
+        public int PurchaseId => Entity.PurchaseId;
 
         public decimal Amount
         {
@@ -49,17 +50,24 @@ namespace CommuneCalculator.EntityViewModels
 
         public ShopModel Shop
         {
-            get
-            {
-                return _shopProxy ?? (_shopProxy = new ShopModel
-                {
-                    Entity = Entity.Shop
-                });
-            }
+            get { return _shopProxy ?? (_shopProxy = new ShopModel { Entity = Entity.Shop }); }
             set
             {
+                if(value == null) return;
                 _shopProxy = value;
                 Entity.Shop = value.Entity;
+                RaisePropertyChanged();
+            }
+        }
+
+        public RoommateModel PurchasedBy
+        {
+            get { return _roommateProxy ?? (_roommateProxy = new RoommateModel {Entity = Entity.PurchasedBy}); }
+            set
+            {
+                if(value == null) return;
+                _roommateProxy = value;
+                Entity.PurchasedBy = value.Entity;
                 RaisePropertyChanged();
             }
         }

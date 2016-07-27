@@ -119,6 +119,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AppContext.cs" />
+    <Compile Include="Pages\Purchases\Create\CreatePurchaseModel.cs" />
+    <Compile Include="Pages\Purchases\Overview\PurchaseOverviewModel.cs" />
     <Compile Include="Pages\Settings\DbChooser\DbChooserDialog.xaml.cs">
       <DependentUpon>DbChooserDialog.xaml</DependentUpon>
     </Compile>
@@ -165,9 +167,19 @@
     <Compile Include="Pages\Roommates\Overview\RoommateOverviewModel.cs" />
     <Compile Include="Pages\HomeModel.cs" />
     <Compile Include="Pages\Settings\DbChooser\DbChooserModel.cs" />
+    <Compile Include="Pages\Shops\CreateShop\CreateShopControl.xaml.cs">
+      <DependentUpon>CreateShopControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Shops\CreateShop\CreateShopModel.cs" />
+    <Compile Include="Pages\Shops\ShopOverview\ShopOverview.xaml.cs">
+      <DependentUpon>ShopOverview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\Shops\ShopOverview\ShopOverviewModel.cs" />
     <Compile Include="Utils\DataContextProxy.cs" />
+    <Compile Include="Utils\ReflectionExtensions.cs" />
     <Compile Include="Utils\UserControlExtensions.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ValidateableViewModelBase.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Page Include="Pages\Settings\DbChooser\DbChooserDialog.xaml">
       <SubType>Designer</SubType>
@@ -268,6 +280,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Shops\CreateShop\CreateShopControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Shops\ShopOverview\ShopOverview.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Resources\Styles\CommonStyles.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -286,34 +306,21 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <SplashScreen Include="Resources\Two_title.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Resources\KassenwartViews.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Resource Include="Resources\Images\Auswertung.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\banner-haus.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Content Include="Resources\Haus.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Resource Include="Resources\Images\Icon_Refresh.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Resources\Images\Kassenbeleg_erfassen.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Content Include="Resources\mensch.jpg" />
     <Resource Include="Resources\Images\Mitbewohner.jpg">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
-    <Content Include="Resources\Sparschwein.jpg">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\Roommates\CreateUpdate\CreateUpdateRoommateI18n.de-DE.resx">
@@ -340,7 +347,7 @@
 xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
 if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
 xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"
-7z a $(TargetName).zip *.dll amd64 de-DE Resources x86 $(TargetName).exe $(TargetName).exe.config</PostBuildEvent>
+7z a $(TargetName).zip *.dll amd64 de-DE x86 $(TargetName).exe $(TargetName).exe.config</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

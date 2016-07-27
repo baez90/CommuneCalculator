@@ -5,31 +5,36 @@
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
                             xmlns:base="clr-namespace:CommuneCalculator.Pages.Base"
-                            mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="800">
+                            mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="800"
+                            DataContext="{Binding PurchaseOverview, Source={StaticResource Locator}}">
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TextBlock Text="Belegübersicht: " FontSize="24" />
-        <DataGrid Grid.Row="1" Name="gridBelege" AutoGenerateColumns="False" CanUserReorderColumns="True"
+        <TextBlock Text="Belegübersicht: " VerticalAlignment="Center" Style="{StaticResource Heading2}"/>
+        <mui:ModernButton Grid.Row="0" Content="Aktualisieren" HorizontalAlignment="Right"
+                          IconData="{Binding Data, Source={StaticResource Refresh}}"
+                          Command="{Binding UpdatePurchasesCommand}"
+                          Margin="10"/>
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" CanUserReorderColumns="True"
                   CanUserResizeColumns="True"
+                  ItemsSource="{Binding Purchases}"
                   CanUserResizeRows="False" CanUserSortColumns="True" AlternatingRowBackground="Gainsboro"
                   AlternationCount="2">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Kategorie" Binding="{Binding Kategorie}" />
+                <DataGridTextColumn Header="Kategorie" Binding="{Binding Category.Name}" />
                 <DataGridTextColumn Header="Datum"
-                                    Binding="{Binding Datum,StringFormat={}{0:dddd dd MMMM},ConverterCulture=de-DE}" />
-                <DataGridTextColumn Header="Betrag" Binding="{Binding Betrag,StringFormat={}{0} €}" />
-                <DataGridTextColumn Header="Erstellt von" Binding="{Binding BewohnerEntity.Login}" />
+                                    Binding="{Binding PurchaseDate,StringFormat={}{0:dddd dd MMMM},ConverterCulture=de-DE}" />
+                <DataGridTextColumn Header="Betrag" Binding="{Binding Amount,StringFormat={}{0} €}" />
+                <DataGridTextColumn Header="Erstellt von" Binding="{Binding PurchasedBy.FullName}" />
             </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="2" Content="Neuen Beleg erfassen" HorizontalAlignment="Left"
-                Margin="10" />
-        <Button Grid.Row="0" Content="Aktualisieren" HorizontalAlignment="Right" />
-        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Abbrechen" HorizontalAlignment="Right" Margin="10" />
-        </StackPanel>
+        <mui:ModernButton Grid.Row="2" Content="Neuen Beleg erfassen" HorizontalAlignment="Left"
+                          Margin="10"
+                          Command="{Binding CreatePurchaseCommand}"
+                          IconData="{Binding Data, Source={StaticResource Library-Plus}}" />
+        
     </Grid>
 </base:DisposableUserControl>

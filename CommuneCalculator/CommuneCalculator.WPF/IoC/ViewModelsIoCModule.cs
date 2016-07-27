@@ -3,10 +3,14 @@ using CommuneCalculator.DB.DataAccess;
 using CommuneCalculator.DB.Entities;
 using CommuneCalculator.Navigation;
 using CommuneCalculator.Pages;
+using CommuneCalculator.Pages.Purchases.Create;
+using CommuneCalculator.Pages.Purchases.Overview;
 using CommuneCalculator.Pages.Roommates.Absences.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.Overview;
 using CommuneCalculator.Pages.Settings.DbChooser;
+using CommuneCalculator.Pages.Shops.CreateShop;
+using CommuneCalculator.Pages.Shops.ShopOverview;
 using CommuneCalculator.ViewModel;
 
 namespace CommuneCalculator.IoC
@@ -19,6 +23,18 @@ namespace CommuneCalculator.IoC
                 .AsSelf()
                 .SingleInstance();
 
+            builder.Register(context => new HomeModel(context.Resolve<INavigator>()))
+                .AsSelf()
+                .SingleInstance();
+
+            builder.Register(context => new CreatePurchaseModel(context.Resolve<INavigator>(), context.Resolve<IDataRepo<Roommate>>()))
+                .AsSelf()
+                .InstancePerDependency();
+
+            builder.Register(context => new PurchaseOverviewModel(context.Resolve<INavigator>(), context.Resolve<IDataRepo<Purchase>>()))
+                .AsSelf()
+                .SingleInstance();
+
             builder.Register(context => new CreateRoommateModel(context.Resolve<IDataRepo<Roommate>>(), context.Resolve<INavigator>()))
                 .AsSelf()
                 .InstancePerDependency();
@@ -27,7 +43,11 @@ namespace CommuneCalculator.IoC
                 .AsSelf()
                 .SingleInstance();
 
-            builder.Register(context => new HomeModel(context.Resolve<INavigator>()))
+            builder.Register(context => new CreateShopModel())
+                .AsSelf()
+                .InstancePerDependency();
+
+            builder.Register(context => new ShopOverviewModel(context.Resolve<INavigator>(), context.Resolve<IDataRepo<Shop>>()))
                 .AsSelf()
                 .SingleInstance();
 

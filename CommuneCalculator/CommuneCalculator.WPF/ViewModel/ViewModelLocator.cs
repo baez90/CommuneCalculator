@@ -1,10 +1,14 @@
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommuneCalculator.Pages;
+using CommuneCalculator.Pages.Purchases.Create;
+using CommuneCalculator.Pages.Purchases.Overview;
 using CommuneCalculator.Pages.Roommates.Absences.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.Overview;
 using CommuneCalculator.Pages.Settings.DbChooser;
+using CommuneCalculator.Pages.Shops.CreateShop;
+using CommuneCalculator.Pages.Shops.ShopOverview;
 using Microsoft.Practices.ServiceLocation;
 
 namespace CommuneCalculator.ViewModel
@@ -27,9 +31,17 @@ namespace CommuneCalculator.ViewModel
 
         public HomeModel Home => AppContext.Container.Resolve<HomeModel>();
 
+        public CreatePurchaseModel CreatePurchase => AppContext.Container.Resolve<CreatePurchaseModel>();
+
+        public PurchaseOverviewModel PurchaseOverview => AppContext.Container.Resolve<PurchaseOverviewModel>();
+
         public CreateRoommateModel CreateRoommate => AppContext.Container.Resolve<CreateRoommateModel>();
 
         public RoommateOverviewModel RoommateOverview => AppContext.Container.Resolve<RoommateOverviewModel>();
+
+        public CreateShopModel CreateShop => AppContext.Container.Resolve<CreateShopModel>();
+
+        public ShopOverviewModel ShopOverview => AppContext.Container.Resolve<ShopOverviewModel>();
 
         public CreateUpdateAbsenceModel CreateUpdateAbsence => AppContext.Container.Resolve<CreateUpdateAbsenceModel>();
 
