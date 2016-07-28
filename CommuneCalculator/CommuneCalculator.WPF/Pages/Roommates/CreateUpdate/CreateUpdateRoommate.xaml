@@ -5,6 +5,7 @@
                             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                             xmlns:base="clr-namespace:CommuneCalculator.Pages.Base"
                             xmlns:i18N="clr-namespace:CommuneCalculator.Pages.Roommates.CreateUpdate"
+                            xmlns:mui="http://firstfloorsoftware.com/ModernUI"
                             mc:Ignorable="d" d:DesignHeight="407.657" d:DesignWidth="553.714"
                             DataContext="{Binding CreateRoommate, Source={StaticResource Locator}}">
     <base:DisposableUserControl.Resources>
@@ -18,9 +19,10 @@
                 <Setter Property="FontSize" Value="15" />
                 <Setter Property="Margin" Value="0, 15, 35, 0" />
             </Style>
-            <Style TargetType="Button" x:Key="DefaultBtn" BasedOn="{StaticResource CommonButton}">
-                <Setter Property="Margin" Value="0, 10, 10, 10" />
-                <Setter Property="Padding" Value="5" />
+
+            <Style TargetType="mui:ModernButton">
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
             </Style>
         </ResourceDictionary>
     </base:DisposableUserControl.Resources>
@@ -39,7 +41,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-
 
         <Label Content="{Binding CreateUpdateRoommateLblHeader, Source={StaticResource I18N}, Mode=OneTime}"
                Grid.ColumnSpan="4"
@@ -73,15 +74,17 @@
 
         <StackPanel Grid.Column="1" Grid.Row="5" Orientation="Horizontal" HorizontalAlignment="Right"
                     VerticalAlignment="Center">
-            <Button Content="{Binding SaveBtnContent, Source={StaticResource I18N}, Mode=OneTime}"
-                    Style="{StaticResource DefaultBtn}"
-                    Command="{Binding SaveRoommateCommand}">
-            </Button>
-            <Button Content="{Binding CancelBtnContent, Source={StaticResource I18N}, Mode=OneTime}"
-                    Style="{StaticResource DefaultBtn}" />
+
+            <mui:ModernButton Content="{Binding SaveBtnContent, Source={StaticResource I18N}, Mode=OneTime}"
+                              IconData="{Binding Data, Source={StaticResource Content-Save}}"
+                              Command="{Binding SaveRoommateCommand}"/>
+
+            <mui:ModernButton Content="{Binding CancelBtnContent, Source={StaticResource I18N}, Mode=OneTime}"
+                              IconData="{Binding Data, Source={StaticResource Close-Circle-Outline}}"
+                              Command="{Binding CancelCommand}"/>
         </StackPanel>
 
-        <Image Source="pack://application:,,,/Resources/Images/banner-haus.jpg" Grid.Column="0" Grid.ColumnSpan="4"
+        <Image Source="pack://application:,,,/Resources/Images/banner-haus.jpg" Grid.Column="0" Grid.ColumnSpan="2"
                Stretch="Fill"
                Margin="0,35,0,25" Grid.Row="6" />
 

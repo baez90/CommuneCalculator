@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using CommuneCalculator.DB.Models;
 
@@ -14,6 +15,9 @@ namespace CommuneCalculator.DB.DataAccess
     /// <typeparam name="TEntity"></typeparam>
     public class BaseDataRepo<TEntity> : IDataRepo<TEntity> where TEntity : class
     {
+
+        private readonly SemaphoreSlim _semaphore = new SemaphoreSlim(1,1);
+
         /// <summary>
         ///     Base constructor
         /// </summary>
@@ -37,7 +41,15 @@ namespace CommuneCalculator.DB.DataAccess
         /// <returns>all entities as IQueryable</returns>
         public virtual IQueryable<TEntity> All()
         {
-            return Context.Set<TEntity>();
+            _semaphore.Wait();
+            try
+            {
+                return Context.Set<TEntity>();
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         /// <summary>
@@ -47,7 +59,15 @@ namespace CommuneCalculator.DB.DataAccess
         /// <returns>entity with specified id or null</returns>
         public virtual Optional<TEntity> FindById(object id)
         {
-            return Context.Set<TEntity>().Find(id);
+            _semaphore.Wait();
+            try
+            {
+                return Context.Set<TEntity>().Find(id);
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         /// <summary>
@@ -56,10 +76,18 @@ namespace CommuneCalculator.DB.DataAccess
         /// <param name="entity">entity to be updated</param>
         public virtual void UpdateEntity(TEntity entity)
         {
-            Context.Set<TEntity>().Attach(entity);
-            var attached = Context.Entry(entity);
-            attached.State = EntityState.Modified;
-            Context.SaveChanges();
+            _semaphore.Wait();
+            try
+            {
+                Context.Set<TEntity>().Attach(entity);
+                var attached = Context.Entry(entity);
+                attached.State = EntityState.Modified;
+                Context.SaveChanges();
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         /// <summary>
@@ -69,9 +97,17 @@ namespace CommuneCalculator.DB.DataAccess
         /// <returns>newly created entity with database id</returns>
         public virtual TEntity CreateEntity(TEntity entity)
         {
-            Context.Set<TEntity>().Add(entity);
-            Context.SaveChanges();
-            return entity;
+            _semaphore.Wait();
+            try
+            {
+                Context.Set<TEntity>().Add(entity);
+                Context.SaveChanges();
+                return entity;
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         /// <summary>
@@ -80,11 +116,19 @@ namespace CommuneCalculator.DB.DataAccess
         /// <param name="id">id of the entity to be deleted</param>
         public virtual void DeleteEntity(object id)
         {
-            var entity = Context.Set<TEntity>().Find(id);
-            if (entity != null)
+            _semaphore.Wait();
+            try
             {
-                Context.Set<TEntity>().Remove(entity);
-                Context.SaveChanges();
+                var entity = Context.Set<TEntity>().Find(id);
+                if (entity != null)
+                {
+                    Context.Set<TEntity>().Remove(entity);
+                    Context.SaveChanges();
+                }
+            }
+            finally
+            {
+                _semaphore.Release();
             }
         }
 
@@ -94,10 +138,18 @@ namespace CommuneCalculator.DB.DataAccess
         /// <param name="entity">entity which should be deleted</param>
         public virtual void DeleteEntity(TEntity entity)
         {
-            if (entity != null)
+            _semaphore.Wait();
+            try
             {
-                Context.Set<TEntity>().Remove(entity);
-                Context.SaveChanges();
+                if (entity != null)
+                {
+                    Context.Set<TEntity>().Remove(entity);
+                    Context.SaveChanges();
+                }
+            }
+            finally
+            {
+                _semaphore.Release();
             }
         }
 
@@ -107,12 +159,20 @@ namespace CommuneCalculator.DB.DataAccess
         /// <param name="entites">IEnumerable entites to be deleted</param>
         public virtual void DeleteEntityRange(IEnumerable<TEntity> entites)
         {
-            var enumerable = entites as IList<TEntity> ?? entites.ToList();
-            if (enumerable.Any())
+            _semaphore.Wait();
+            try
             {
-                Context.Set<TEntity>().RemoveRange(enumerable);
+                var enumerable = entites as IList<TEntity> ?? entites.ToList();
+                if (enumerable.Any())
+                {
+                    Context.Set<TEntity>().RemoveRange(enumerable);
+                }
+                Context.SaveChanges();
             }
-            Context.SaveChanges();
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         /// <summary>
@@ -122,7 +182,15 @@ namespace CommuneCalculator.DB.DataAccess
         /// <returns>boolean result of the check</returns>
         public virtual bool EntityExists(object id)
         {
-            return Context.Set<TEntity>().Find(id) != null;
+            _semaphore.Wait();
+            try
+            {
+                return Context.Set<TEntity>().Find(id) != null;
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         /// <summary>
@@ -132,7 +200,15 @@ namespace CommuneCalculator.DB.DataAccess
         /// <returns>IQueryable result after filtering</returns>
         public virtual IQueryable<TEntity> QueryEntity(Func<IQueryable<TEntity>, IQueryable<TEntity>> queryFunc)
         {
-            return queryFunc(Context.Set<TEntity>());
+            _semaphore.Wait();
+            try
+            {
+                return queryFunc(Context.Set<TEntity>());
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         /// <summary>
@@ -142,7 +218,15 @@ namespace CommuneCalculator.DB.DataAccess
         /// <returns>entity if existing or null if not</returns>
         public virtual async Task<Optional<TEntity>> FindByIdAsync(object id)
         {
-            return await Context.Set<TEntity>().FindAsync(id);
+            await _semaphore.WaitAsync();
+            try
+            {
+                return await Context.Set<TEntity>().FindAsync(id);
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         /// <summary>
@@ -160,8 +244,16 @@ namespace CommuneCalculator.DB.DataAccess
         /// </exception>
         public virtual async Task UpdateEntityAsync(TEntity entity)
         {
-            Context.Entry(entity).State = EntityState.Modified;
-            await Context.SaveChangesAsync();
+            await _semaphore.WaitAsync();
+            try
+            {
+                Context.Entry(entity).State = EntityState.Modified;
+                await Context.SaveChangesAsync();
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         /// <summary>
@@ -171,9 +263,17 @@ namespace CommuneCalculator.DB.DataAccess
         /// <returns>newly created entity</returns>
         public virtual async Task<TEntity> CreateEntityAsync(TEntity entity)
         {
-            Context.Set<TEntity>().Add(entity);
-            await Context.SaveChangesAsync();
-            return entity;
+            await _semaphore.WaitAsync();
+            try
+            {
+                Context.Set<TEntity>().Add(entity);
+                await Context.SaveChangesAsync();
+                return entity;
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         /// <summary>
@@ -183,11 +283,19 @@ namespace CommuneCalculator.DB.DataAccess
         /// <returns>async void</returns>
         public virtual async Task DeleteEntityAsync(object id)
         {
-            var entity = Context.Set<TEntity>().Find(id);
-            if (entity != null)
+            await _semaphore.WaitAsync();
+            try
             {
-                Context.Set<TEntity>().Remove(entity);
-                await Context.SaveChangesAsync();
+                var entity = Context.Set<TEntity>().Find(id);
+                if (entity != null)
+                {
+                    Context.Set<TEntity>().Remove(entity);
+                    await Context.SaveChangesAsync();
+                }
+            }
+            finally
+            {
+                _semaphore.Release();
             }
         }
 
@@ -198,7 +306,15 @@ namespace CommuneCalculator.DB.DataAccess
         /// <returns>boolean result of the check</returns>
         public virtual async Task<bool> EntityExistsAsync(object id)
         {
-            return await Context.Set<TEntity>().FindAsync(id) != null;
+            await _semaphore.WaitAsync();
+            try
+            {
+                return await Context.Set<TEntity>().FindAsync(id) != null;
+            }
+            finally
+            {
+                _semaphore.Release();
+            }
         }
 
         /// <summary>

@@ -11,19 +11,19 @@ namespace CommuneCalculator.ViewModel
 {
     public abstract class ValidateableViewModelBase : ViewModelBase, IDataErrorInfo
     {
-        private readonly Dictionary<string, Func<ValidateableViewModelBase, object>> propertyGetters;
-        private readonly Dictionary<string, ValidationAttribute[]> validators;
+        private readonly Dictionary<string, Func<ValidateableViewModelBase, object>> _propertyGetters;
+        private readonly Dictionary<string, ValidationAttribute[]> _validators;
 
         private int _validationExceptionCount;
 
         protected ValidateableViewModelBase()
         {
-            validators = GetType()
+            _validators = GetType()
                 .GetProperties()
                 .Where(p => p.HasValidationAttributes())
                 .ToDictionary(p => p.Name, p => p.GetValidationAttributes());
 
-            propertyGetters = GetType()
+            _propertyGetters = GetType()
                 .GetProperties()
                 .Where(p => p.HasValidationAttributes())
                 .ToDictionary(p => p.Name, p => p.GetValueGetter<ValidateableViewModelBase>());
@@ -37,8 +37,8 @@ namespace CommuneCalculator.ViewModel
         {
             get
             {
-                var query = from validator in validators
-                    where validator.Value.All(attribute => attribute.IsValid(propertyGetters[validator.Key](this)))
+                var query = from validator in _validators
+                    where validator.Value.All(attribute => attribute.IsValid(_propertyGetters[validator.Key](this)))
                     select validator;
                 return query.Count() - _validationExceptionCount;
             }
@@ -48,7 +48,7 @@ namespace CommuneCalculator.ViewModel
         /// <summary>
         ///     Gets the number of properties which have a validation attribute
         /// </summary>
-        public int TotalPropertiesWithValidationCount => validators.Count;
+        public int TotalPropertiesWithValidationCount => _validators.Count;
 
         /// <summary>
         ///     Gets the error message for the property with the given name.
@@ -58,10 +58,10 @@ namespace CommuneCalculator.ViewModel
         {
             get
             {
-                if (!propertyGetters.ContainsKey(propertyName)) return string.Empty;
-                var propertyValue = propertyGetters[propertyName](this);
+                if (!_propertyGetters.ContainsKey(propertyName)) return string.Empty;
+                var propertyValue = _propertyGetters[propertyName](this);
 
-                var errorMessages = validators[propertyName]
+                var errorMessages = _validators[propertyName]
                     .Where(v => !v.IsValid(propertyValue))
                     .Select(v => v.ErrorMessage).ToArray();
 
@@ -77,9 +77,9 @@ namespace CommuneCalculator.ViewModel
         {
             get
             {
-                var errors = from validator in validators
+                var errors = from validator in _validators
                     from attribute in validator.Value
-                    where !attribute.IsValid(propertyGetters[validator.Key](this))
+                    where !attribute.IsValid(_propertyGetters[validator.Key](this))
                     select attribute.ErrorMessage;
 
                 return string.Join(Environment.NewLine, errors.ToArray());
@@ -88,11 +88,11 @@ namespace CommuneCalculator.ViewModel
 
         public bool IsValid(string propertyName)
         {
-            if (!propertyGetters.ContainsKey(propertyName)) return false;
-            var propertyValue = propertyGetters[propertyName](this);
+            if (!_propertyGetters.ContainsKey(propertyName)) return false;
+            var propertyValue = _propertyGetters[propertyName](this);
 
-            return validators[propertyName].Select(attribute => attribute.IsValid(propertyValue)).Count(b => b) ==
-                   validators[propertyName].Length;
+            return _validators[propertyName].Select(attribute => attribute.IsValid(propertyValue)).Count(b => b) ==
+                   _validators[propertyName].Length;
         }
 
 
@@ -111,11 +111,11 @@ namespace CommuneCalculator.ViewModel
             }
 
             var propertyName = body.Member.Name;
-            if (!propertyGetters.ContainsKey(propertyName)) return false;
-            var propertyValue = propertyGetters[propertyName](this);
+            if (!_propertyGetters.ContainsKey(propertyName)) return false;
+            var propertyValue = _propertyGetters[propertyName](this);
 
-            return validators[propertyName].Select(attribute => attribute.IsValid(propertyValue)).Count(b => b) ==
-                   validators[propertyName].Length;
+            return _validators[propertyName].Select(attribute => attribute.IsValid(propertyValue)).Count(b => b) ==
+                   _validators[propertyName].Length;
         }
     }
 }

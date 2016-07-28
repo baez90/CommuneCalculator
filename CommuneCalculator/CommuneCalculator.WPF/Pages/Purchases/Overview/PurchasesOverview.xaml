@@ -6,18 +6,21 @@
                             xmlns:mui="http://firstfloorsoftware.com/ModernUI"
                             xmlns:base="clr-namespace:CommuneCalculator.Pages.Base"
                             mc:Ignorable="d" d:DesignHeight="500" d:DesignWidth="800"
-                            DataContext="{Binding PurchaseOverview, Source={StaticResource Locator}}">
+                            DataContext="{Binding PurchaseOverview, Source={StaticResource Locator}, Mode=OneTime}">
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
+        
         <TextBlock Text="Belegübersicht: " VerticalAlignment="Center" Style="{StaticResource Heading2}"/>
+        
         <mui:ModernButton Grid.Row="0" Content="Aktualisieren" HorizontalAlignment="Right"
                           IconData="{Binding Data, Source={StaticResource Refresh}}"
-                          Command="{Binding UpdatePurchasesCommand}"
+                          Command="{Binding UpdatePurchasesCommand, Mode=OneTime}"
                           Margin="10"/>
+        
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" CanUserReorderColumns="True"
                   CanUserResizeColumns="True"
                   ItemsSource="{Binding Purchases}"
@@ -33,7 +36,7 @@
         </DataGrid>
         <mui:ModernButton Grid.Row="2" Content="Neuen Beleg erfassen" HorizontalAlignment="Left"
                           Margin="10"
-                          Command="{Binding CreatePurchaseCommand}"
+                          Command="{Binding CreatePurchaseCommand, Mode=OneTime}"
                           IconData="{Binding Data, Source={StaticResource Library-Plus}}" />
         
     </Grid>

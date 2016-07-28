@@ -4,6 +4,7 @@ using CommuneCalculator.DB.Entities;
 using CommuneCalculator.Navigation;
 using CommuneCalculator.Pages;
 using CommuneCalculator.Pages.Categories.Create;
+using CommuneCalculator.Pages.Categories.Overview;
 using CommuneCalculator.Pages.Purchases.Create;
 using CommuneCalculator.Pages.Purchases.Overview;
 using CommuneCalculator.Pages.Roommates.Absences.CreateUpdate;
@@ -61,7 +62,11 @@ namespace CommuneCalculator.IoC
                 .AsSelf()
                 .InstancePerDependency();
 
-            builder.Register(context => new CreateCategoryModel())
+            builder.Register(context => new CategoryOverviewModel(context.Resolve<INavigator>(), context.Resolve<IDataRepo<Category>>()))
+                .AsSelf()
+                .SingleInstance();
+
+            builder.Register(context => new CreateCategoryModel(context.Resolve<INavigator>(), context.Resolve<IDataRepo<Category>>()))
                 .AsSelf()
                 .InstancePerDependency();
 

@@ -8,6 +8,7 @@
                             xmlns:i18N="clr-namespace:CommuneCalculator.Pages.Roommates.Overview"
                             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
                             xmlns:utils="clr-namespace:CommuneCalculator.Utils"
+                            xmlns:mui="http://firstfloorsoftware.com/ModernUI"
                             mc:Ignorable="d"
                             DataContext="{Binding RoommateOverview, Source={StaticResource Locator}}">
     <i:Interaction.Triggers>
@@ -16,7 +17,11 @@
         </i:EventTrigger>
     </i:Interaction.Triggers>
     <base:DisposableUserControl.Resources>
-        <ResourceDictionary />
+        <ResourceDictionary>
+            <Style TargetType="mui:ModernButton">
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+        </ResourceDictionary>
     </base:DisposableUserControl.Resources>
     <Grid Style="{StaticResource ContentRoot}">
         <Grid.RowDefinitions>
@@ -25,7 +30,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <DataGrid AutoGenerateColumns="False" CanUserReorderColumns="True"
-                  CanUserResizeColumns="True"
+                  CanUserResizeColumns="True" IsManipulationEnabled="False" CanUserAddRows="False" CanUserDeleteRows="False"
                   CanUserResizeRows="False" CanUserSortColumns="True" AlternatingRowBackground="LightBlue"
                   AlternationCount="2" ItemsSource="{Binding Roommates}">
             <DataGrid.Resources>
@@ -33,45 +38,33 @@
                                         Data="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=DataGrid}}" />
             </DataGrid.Resources>
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.FirstNameColHeader}"
+                <mui:DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.FirstNameColHeader}"
                                     Binding="{Binding FirstName}" />
-                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.LastNameColHeader}"
+                <mui:DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.LastNameColHeader}"
                                     Binding="{Binding LastName}" />
-                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.MoveInDateColHeader}"
+                <mui:DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.MoveInDateColHeader}"
                                     Binding="{Binding MoveInDate,StringFormat={}{0:dddd dd MMMM yyyy},ConverterCulture=de-DE}" />
-                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.MoveOutColHeader}"
+                <mui:DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.MoveOutColHeader}"
                                     Binding="{Binding MoveOutDate,StringFormat={}{0:dddd dd MMMM yyyy},ConverterCulture=de-DE, TargetNullValue='{x:Static i18N:RoommateOverviewI18n.MoveOutColTargetNull}'}" />
-                <DataGridTextColumn Header="{x:Static i18N:RoommateOverviewI18n.LoginColHeader}"
-                                    Binding="{Binding Login}" />
             </DataGrid.Columns>
             <DataGrid.ContextMenu>
                 <ContextMenu>
                     <MenuItem Header="{x:Static i18N:RoommateOverviewI18n.EditRoommateCtxMenuItem}"
                               Command="{Binding EditRoommateCommand}"
                               CommandParameter="{Binding Data.SelectedItem, Source={StaticResource Proxy}}" />
+
+                    <MenuItem Header="Abwesenheit hinzufügen"
+                              Command="{Binding EditRoommateCommand}"
+                              CommandParameter="{Binding Data.SelectedItem, Source={StaticResource Proxy}}" />
                 </ContextMenu>
             </DataGrid.ContextMenu>
-            <DataGrid.RowDetailsTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <DataGrid />
-                        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Content="Abwesenheit hinzufügen" Style="{StaticResource CommonButton}"
-                                    Margin="0 10 10 10" />
-                        </StackPanel>
-                    </Grid>
-                </DataTemplate>
-            </DataGrid.RowDetailsTemplate>
         </DataGrid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Command="{Binding SwitchToCreateRoommateView}"
-                    Content="{x:Static i18N:RoommateOverviewI18n.CreateRoommateBtnLbl}" Margin="0,65,0,10"
-                    Style="{StaticResource CommonButton}" />
+            <mui:ModernButton Command="{Binding SwitchToCreateRoommateView}"
+                              Content="{x:Static i18N:RoommateOverviewI18n.CreateRoommateBtnLbl}"
+                              IconData="{Binding Data, Source={StaticResource Account-Plus}}"
+                              Style="{StaticResource CommonButton}" />
         </StackPanel>
 
         <Image Source="pack://application:,,,/Resources/Images/banner-haus.jpg" Stretch="Fill" Margin="0,0,0,10"

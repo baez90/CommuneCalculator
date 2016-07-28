@@ -1,14 +1,34 @@
 ﻿<base:DisposableUserControl x:Class="CommuneCalculator.Pages.Categories.Overview.CategoryOverview"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:CommuneCalculator.Pages.Categories.Overview"
-             xmlns:base="clr-namespace:CommuneCalculator.Pages.Base"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
+                            xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                            xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                            xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                            xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                            xmlns:base="clr-namespace:CommuneCalculator.Pages.Base"
+                            xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+                            mc:Ignorable="d"
+                            d:DesignHeight="300" d:DesignWidth="300"
+                            DataContext="{Binding CategoryOverview, Source={StaticResource Locator}, Mode=OneTime}">
+    <Grid Style="{StaticResource ContentRoot}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="Belegübersicht: " VerticalAlignment="Center" Style="{StaticResource Heading2}"/>
+
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" CanUserReorderColumns="False"
+                  CanUserSortColumns="True" AlternatingRowBackground="{DynamicResource Accent}" AlternationCount="2"
+                  ItemsSource="{Binding Categories, IsAsync=True}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <mui:ModernButton Grid.Row="2" Content="Neuen Beleg erfassen" HorizontalAlignment="Left"
+                          Margin="10"
+                          Command="{Binding CreateCategoryCommand, Mode=OneTime}"
+                          IconData="{Binding Data, Source={StaticResource Library-Plus}}" />
+        
     </Grid>
 </base:DisposableUserControl>
-

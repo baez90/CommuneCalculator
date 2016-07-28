@@ -1,4 +1,5 @@
-﻿using CommuneCalculator.DB.Entities;
+﻿using System.ComponentModel.DataAnnotations;
+using CommuneCalculator.DB.Entities;
 
 namespace CommuneCalculator.EntityViewModels
 {
@@ -6,6 +7,7 @@ namespace CommuneCalculator.EntityViewModels
     {
         public int CategoryId => Entity.CategoryId;
 
+        [StringLength(30, ErrorMessage = "Name must be shorter than 30 characters"), Required(ErrorMessage = "Name is required")]
         public string Name
         {
             get { return Entity == null ? "" : Entity.Name; }

@@ -29,7 +29,13 @@
         
         <mui:LinkGroup DisplayName="Geschäfte">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Geschäft Übersicht" Source="Pages/Shops/ShopOverview/ShopOverview.xaml"/>
+                <mui:Link DisplayName="Geschäft Übersicht" Source="Pages/Shops/Overview/ShopOverview.xaml"/>
+            </mui:LinkGroup.Links>
+        </mui:LinkGroup>
+        
+        <mui:LinkGroup DisplayName="Kategorien">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Kategorie Übersicht" Source="Pages/Categories/Overview/CategoryOverview.xaml"/>
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
 

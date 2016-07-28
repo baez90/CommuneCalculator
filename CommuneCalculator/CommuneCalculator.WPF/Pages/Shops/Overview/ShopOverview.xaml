@@ -21,15 +21,11 @@
         </Grid.ColumnDefinitions>
 
         <TextBlock Text="Geschäfte" Style="{StaticResource Heading2}" />
-        <mui:ModernButton Content="Aktualisieren" HorizontalAlignment="Right"
-                          Grid.Row="0" Grid.Column="2"
-                          Command="{Binding UpdateCommand, Mode=OneTime}"
-                          IconData="{Binding Data, Source={StaticResource Refresh}}" />
 
         <DataGrid Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="3"
                   AutoGenerateColumns="False" AlternationCount="2" AlternatingRowBackground="{DynamicResource Accent}"
-                  CanUserReorderColumns="True"
-                  ItemsSource="{Binding Shops}">
+                  CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                  ItemsSource="{Binding Shops, IsAsync=True}">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Name" Binding="{Binding ShopName, Mode=OneTime}" />
             </DataGrid.Columns>
