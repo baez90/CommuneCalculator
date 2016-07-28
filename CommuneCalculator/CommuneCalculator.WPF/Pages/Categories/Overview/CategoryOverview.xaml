@@ -18,6 +18,7 @@
         <TextBlock Text="Belegübersicht: " VerticalAlignment="Center" Style="{StaticResource Heading2}"/>
 
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" CanUserReorderColumns="False"
+                  CanUserAddRows="False" CanUserDeleteRows="False"
                   CanUserSortColumns="True" AlternatingRowBackground="{DynamicResource Accent}" AlternationCount="2"
                   ItemsSource="{Binding Categories, IsAsync=True}">
             <DataGrid.Columns>

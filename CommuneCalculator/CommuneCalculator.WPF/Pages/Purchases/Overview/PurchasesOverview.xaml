@@ -13,18 +13,18 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        
+
         <TextBlock Text="Belegübersicht: " VerticalAlignment="Center" Style="{StaticResource Heading2}"/>
-        
+
         <mui:ModernButton Grid.Row="0" Content="Aktualisieren" HorizontalAlignment="Right"
                           IconData="{Binding Data, Source={StaticResource Refresh}}"
                           Command="{Binding UpdatePurchasesCommand, Mode=OneTime}"
                           Margin="10"/>
-        
+
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" CanUserReorderColumns="True"
-                  CanUserResizeColumns="True"
-                  ItemsSource="{Binding Purchases}"
-                  CanUserResizeRows="False" CanUserSortColumns="True" AlternatingRowBackground="Gainsboro"
+                  CanUserResizeColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                  ItemsSource="{Binding Purchases, IsAsync=True}"
+                  CanUserResizeRows="False" CanUserSortColumns="True" AlternatingRowBackground="{DynamicResource Accent}"
                   AlternationCount="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Kategorie" Binding="{Binding Category.Name}" />

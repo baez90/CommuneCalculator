@@ -11,28 +11,28 @@
     <base:DisposableUserControl.Resources>
         <ResourceDictionary>
             <Style TargetType="Label">
-                <Setter Property="VerticalContentAlignment" Value="Center"/>
-                <Setter Property="FontWeight" Value="Bold"/>
+                <Setter Property="VerticalContentAlignment" Value="Center" />
+                <Setter Property="FontWeight" Value="Bold" />
             </Style>
-            
+
             <Style TargetType="TextBox">
-                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Margin" Value="10" />
             </Style>
-            
+
             <Style TargetType="mui:ModernButton">
-                <Setter Property="Margin" Value="10"/>
-                <Setter Property="HorizontalAlignment" Value="Right"/>
+                <Setter Property="Margin" Value="10" />
+                <Setter Property="HorizontalAlignment" Value="Right" />
             </Style>
 
             <Style x:Key="HidableStackPanel" TargetType="StackPanel">
-                <Setter Property="Orientation" Value="Vertical"/>
-                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Orientation" Value="Vertical" />
+                <Setter Property="HorizontalAlignment" Value="Center" />
                 <Style.Triggers>
                     <DataTrigger Binding="{Binding IsSaving}" Value="True">
-                        <Setter Property="Visibility" Value="Visible"/>
+                        <Setter Property="Visibility" Value="Visible" />
                     </DataTrigger>
                     <DataTrigger Binding="{Binding IsSaving}" Value="False">
-                        <Setter Property="Visibility" Value="Hidden"/>
+                        <Setter Property="Visibility" Value="Hidden" />
                     </DataTrigger>
                 </Style.Triggers>
             </Style>
@@ -52,31 +52,36 @@
             <ColumnDefinition Width="2*" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        
+
         <TextBlock Text="Neues Geschäft:" Style="{StaticResource Heading2}"
-                   Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3"/>
+                   Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" />
 
         <StackPanel Grid.Row="0" Grid.Column="3" Style="{StaticResource HidableStackPanel}">
             <mui:ModernProgressRing IsActive="{Binding IsSaving}" Margin="10" />
-            <TextBlock Text="Saving..." FontWeight="Bold"/>
+            <TextBlock Text="Saving..." FontWeight="Bold" />
         </StackPanel>
 
-        <Label Content="Name:" Grid.Row="2" Grid.Column="1"/>
-        
+        <Label Content="Name:" Grid.Row="2" Grid.Column="1" />
+
         <TextBox Grid.Row="2" Grid.Column="2"
                  Text="{Binding Shop.ShopName, ValidatesOnDataErrors=True, UpdateSourceTrigger=PropertyChanged}"
-                 ToolTip="{Binding Path=(Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource Self}}"/>
-        
-        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal" HorizontalAlignment="Right">
-            
+                 ToolTip="{Binding Path=(Validation.Errors)[0].ErrorContent, RelativeSource={RelativeSource Self}}">
+            <TextBox.InputBindings>
+                <KeyBinding Key="Enter" Command="{Binding SaveCommand}" />
+            </TextBox.InputBindings>
+        </TextBox>
+
+        <StackPanel Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="4" Orientation="Horizontal"
+                    HorizontalAlignment="Right">
+
             <mui:ModernButton Content="Speichern"
                               Command="{Binding SaveCommand, Mode=OneTime}"
-                              IconData="{Binding Data, Source={StaticResource Content-Save}}"/>
-            
+                              IconData="{Binding Data, Source={StaticResource Content-Save}}" />
+
             <mui:ModernButton Content="Abbrechen"
                               Command="{Binding CancelCommand, Mode=OneTime}"
-                              IconData="{Binding Data, Source={StaticResource Close-Circle-Outline}}"/>
-            
+                              IconData="{Binding Data, Source={StaticResource Close-Circle-Outline}}" />
+
         </StackPanel>
     </Grid>
 </base:DisposableUserControl>

@@ -9,6 +9,7 @@ using CommuneCalculator.DB.Entities;
 using CommuneCalculator.EntityViewModels;
 using CommuneCalculator.Navigation;
 using CommuneCalculator.Pages.Purchases.Overview;
+using CommuneCalculator.Utils;
 using CommuneCalculator.ViewModel;
 using FirstFloor.ModernUI.Windows.Controls;
 using GalaSoft.MvvmLight.CommandWpf;
@@ -110,6 +111,7 @@ namespace CommuneCalculator.Pages.Purchases.Create
             }
             await _purchasesRepo.CreateEntityAsync(Purchase.Entity);
             _navigator.NavigateTo<PurchasesOverview>();
+            this.RaiseBroadcastPropertyChanged<PurchaseOverviewModel, List<PurchaseModel>>(model => model.Purchases);
         }
 
         #endregion

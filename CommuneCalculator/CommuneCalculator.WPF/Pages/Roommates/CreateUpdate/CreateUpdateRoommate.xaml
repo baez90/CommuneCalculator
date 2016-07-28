@@ -27,6 +27,9 @@
         </ResourceDictionary>
     </base:DisposableUserControl.Resources>
     <Grid Style="{StaticResource ContentRoot}">
+        <Grid.InputBindings>
+            <KeyBinding Key="Enter" Modifiers="Control" Command="{Binding SaveRoommateCommand}"/>
+        </Grid.InputBindings>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />

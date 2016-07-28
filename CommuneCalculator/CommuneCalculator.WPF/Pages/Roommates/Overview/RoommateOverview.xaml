@@ -60,12 +60,10 @@
             </DataGrid.ContextMenu>
         </DataGrid>
 
-        <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right">
-            <mui:ModernButton Command="{Binding SwitchToCreateRoommateView}"
+        <mui:ModernButton Grid.Row="1" Command="{Binding SwitchToCreateRoommateView}"
                               Content="{x:Static i18N:RoommateOverviewI18n.CreateRoommateBtnLbl}"
                               IconData="{Binding Data, Source={StaticResource Account-Plus}}"
                               Style="{StaticResource CommonButton}" />
-        </StackPanel>
 
         <Image Source="pack://application:,,,/Resources/Images/banner-haus.jpg" Stretch="Fill" Margin="0,0,0,10"
                Grid.Row="2" />

@@ -84,6 +84,7 @@ namespace CommuneCalculator.Pages.Roommates.CreateUpdate
                 {
                     await _roommateRepo.CreateEntityAsync(Roommate.Entity);
                 }
+                _navigator.NavigateTo<RoommateOverview>();
             }
             catch (Exception)
             {
