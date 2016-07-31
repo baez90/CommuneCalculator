@@ -1,6 +1,5 @@
 ﻿using Autofac;
 using CommuneCalculator.Pages;
-using CommuneCalculator.Pages.Auswertung;
 using CommuneCalculator.Pages.Categories.Create;
 using CommuneCalculator.Pages.Categories.Overview;
 using CommuneCalculator.Pages.Purchases.Create;
@@ -10,6 +9,7 @@ using CommuneCalculator.Pages.Roommates.CreateUpdate;
 using CommuneCalculator.Pages.Roommates.Overview;
 using CommuneCalculator.Pages.Shops.Create;
 using CommuneCalculator.Pages.Shops.Overview;
+using CommuneCalculator.Pages.Statistics.Expenditure;
 
 namespace CommuneCalculator.IoC
 {
@@ -18,7 +18,7 @@ namespace CommuneCalculator.IoC
         protected override void Load(ContainerBuilder builder)
         {
 
-            builder.Register(context => new AusgabenVerlauf())
+            builder.Register(context => new ExpenditureTrend())
                 .AsSelf()
                 .SingleInstance();
 

@@ -1,13 +1,13 @@
 ﻿using CommuneCalculator.Pages.Base;
 
-namespace CommuneCalculator.Pages.Auswertung
+namespace CommuneCalculator.Pages.Statistics.Expenditure
 {
     /// <summary>
     ///     Interaction logic for AusgabenVerlauf.xaml
     /// </summary>
-    public partial class AusgabenVerlauf : DisposableUserControl
+    public partial class ExpenditureTrend : DisposableUserControl
     {
-        public AusgabenVerlauf()
+        public ExpenditureTrend()
         {
             InitializeComponent();
         }

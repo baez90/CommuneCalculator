@@ -41,10 +41,10 @@
 
         <mui:LinkGroup DisplayName="Auswertung">
             <mui:LinkGroup.Links>
-                <mui:Link DisplayName="Ausgaben Verlauf" Source="/Pages/Auswertung/AusgabenVerlauf.xaml" />
-                <mui:Link DisplayName="Beleg Auswertung" Source="/Pages/Auswertung/BelegAuswertung.xaml" />
-                <mui:Link DisplayName="Kategorie" Source="/Pages/Auswertung/KategorieAuswertung.xaml" />
-                <mui:Link DisplayName="Bewohner" Source="/Pages/Auswertung/BewohnerAuswertung.xaml" />
+                <mui:Link DisplayName="Ausgaben Verlauf" Source="/Pages/Statistics/Expenditure/ExpenditureTrend.xaml" />
+                <mui:Link DisplayName="Beleg Auswertung" Source="/Pages/Statistics/Purchase/PurchaseStats.xaml" />
+                <mui:Link DisplayName="Kategorie" Source="/Pages/Statistics/Category/CategoryStats.xaml" />
+                <mui:Link DisplayName="Bewohner" Source="/Pages/Statistics/Roommate/RoommateStats.xaml" />
             </mui:LinkGroup.Links>
         </mui:LinkGroup>
 

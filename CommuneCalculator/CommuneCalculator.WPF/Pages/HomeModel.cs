@@ -1,8 +1,8 @@
 ﻿using System.Windows.Input;
 using CommuneCalculator.Navigation;
-using CommuneCalculator.Pages.Auswertung;
 using CommuneCalculator.Pages.Purchases.Overview;
 using CommuneCalculator.Pages.Roommates.Overview;
+using CommuneCalculator.Pages.Statistics.Expenditure;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.CommandWpf;
 
@@ -21,6 +21,6 @@ namespace CommuneCalculator.Pages
 
         public ICommand NavigateToRoommatesCommand => new RelayCommand(() => _navigator.NavigateTo<RoommateOverview>(OpeningMode.Window));
 
-        public ICommand NavigateToStatsCommand => new RelayCommand(() => _navigator.NavigateTo<AusgabenVerlauf>());
+        public ICommand NavigateToStatsCommand => new RelayCommand(() => _navigator.NavigateTo<ExpenditureTrend>());
     }
 }

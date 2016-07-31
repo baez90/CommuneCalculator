@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace CommuneCalculator.Pages.Auswertung
+namespace CommuneCalculator.Pages.Statistics.Purchase
 {
     /// <summary>
     ///     Interaction logic for BelegAuswertung.xaml
     /// </summary>
-    public partial class BelegAuswertung : UserControl
+    public partial class PurchaseStats : UserControl
     {
-        public BelegAuswertung()
+        public PurchaseStats()
         {
             InitializeComponent();
         }

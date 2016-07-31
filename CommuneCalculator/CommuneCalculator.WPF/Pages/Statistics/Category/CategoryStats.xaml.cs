@@ -1,13 +1,13 @@
 ﻿using System.Windows.Controls;
 
-namespace CommuneCalculator.Pages.Auswertung
+namespace CommuneCalculator.Pages.Statistics.Category
 {
     /// <summary>
     ///     Interaction logic for KategorieAuswertung.xaml
     /// </summary>
-    public partial class KategorieAuswertung : UserControl
+    public partial class CategoryStats : UserControl
     {
-        public KategorieAuswertung()
+        public CategoryStats()
         {
             InitializeComponent();
         }

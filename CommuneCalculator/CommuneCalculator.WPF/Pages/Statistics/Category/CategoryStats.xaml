@@ -1,21 +1,14 @@
-﻿<UserControl x:Class="CommuneCalculator.Pages.Auswertung.BelegAuswertung"
+﻿<UserControl x:Class="CommuneCalculator.Pages.Statistics.Category.CategoryStats"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              xmlns:chartingToolkit="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
-             x:Name="ucKontoAuswertung"
+             x:Name="ucKategorieAuswertung"
              mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="300">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <Style TargetType="DataGridCell">
-                <Setter Property="HorizontalAlignment" Value="Center" />
-            </Style>
-        </ResourceDictionary>
-    </UserControl.Resources>
-    <Grid Style="{StaticResource ContentRoot}" DataContext="{Binding ElementName=ucKontoAuswertung}">
+    <Grid Style="{StaticResource ContentRoot}" DataContext="{Binding ElementName=ucKategorieAuswertung}">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -35,25 +28,12 @@
                         SelectedDate="{Binding EndDatum, UpdateSourceTrigger=PropertyChanged}"
                         VerticalAlignment="Center" />
         </StackPanel>
-        <TabControl Grid.Row="1" Margin="0 10 0 0">
-            <TabItem Header="Übersicht">
-                <chartingToolkit:Chart Title="Kontostand" LegendTitle="Bewohner">
-                    <chartingToolkit:Chart.Series>
-                        <chartingToolkit:ColumnSeries Title="Kontostand" ItemsSource="{Binding BewohnerAusgaben}"
-                                                      DependentValuePath="Betrag" IndependentValuePath="Bewohner" />
-                    </chartingToolkit:Chart.Series>
-                </chartingToolkit:Chart>
-            </TabItem>
-            <TabItem Header="Tabelle">
-                <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding BewohnerAusgaben}">
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="Vorname" Binding="{Binding Vorname}" Width="*" />
-                        <DataGridTextColumn Header="Nachname" Binding="{Binding Nachname}" Width="*" />
-                        <DataGridTextColumn Header="Kontostand" Binding="{Binding Betrag}" Width="*" />
-                    </DataGrid.Columns>
-                </DataGrid>
-            </TabItem>
-        </TabControl>
-
+        <chartingToolkit:Chart Grid.Row="1" Title="Ausgaben nach Bewohner" LegendTitle="Bewohner" Margin="0 10 0 0">
+            <chartingToolkit:Chart.Series>
+                <chartingToolkit:PieSeries ItemsSource="{Binding KategorieAusgaben}"
+                                           IndependentValuePath="KategorieName"
+                                           DependentValuePath="Betrag" />
+            </chartingToolkit:Chart.Series>
+        </chartingToolkit:Chart>
     </Grid>
 </UserControl>
